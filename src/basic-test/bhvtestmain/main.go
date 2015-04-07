@@ -3,14 +3,14 @@ package main
 import (
 	"database/sql"
 	"dbflute/adf/centity"
-	"dbflute/adf/pmb"
+	"dbflute/adf/pmb" 
 	"fmt"
 	_ "github.com/lib/pq"
 	"github.com/mikeshimura/dbflute/df"
 	"github.com/mikeshimura/dbflute/log"
 )
 
-func main() {
+func main() { 
 	log.InternalDebugFlag= false
 	var Db *sql.DB
 	var err error
@@ -31,5 +31,5 @@ func main() {
 	fmt.Println("result no:", l.AllRecordCount)
 	tt := (l.List.Get(0)).(*centity.C_SelectMember)
 	fmt.Printf("MemberName %s:\n", tt.GetMemberName())
-	tx.Commit()
+	tx.Commit() 
 }
