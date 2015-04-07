@@ -34,7 +34,7 @@ func (o *C_${myExtendedParameterBeanClassName}) Set${database.initCap($propertyN
 #end
 
 func (o *C_${myExtendedParameterBeanClassName}) GetEntityType() string {
-	return "C_Name"
+	return "C_${pmbMetaData.getOutsideSqlFile().getEntityName()}"
 }
 func (o *C_${myExtendedParameterBeanClassName}) GetOutsideSqlPath() string {
 	return "${goPackageBase}/adf/bhv/sql/${pmbMetaData.getOutsideSqlFile().getFileName()}"
@@ -42,12 +42,12 @@ func (o *C_${myExtendedParameterBeanClassName}) GetOutsideSqlPath() string {
 
 #if ($pmbMetaData.isRelatedToCustomizeEntity())
 func (o *C_${myExtendedParameterBeanClassName}) SelectList(tx *sql.Tx) (*df.ListResultBean, error) {
-	return bhv.LiTblBhv_I.OutsideSql().SelectList(o,tx)
+	return bhv.${pmbMetaData.getOutsideSqlFile().getBhvName()}_I.OutsideSql().SelectList(o,tx)
 
 }
 #else
 func (o *C_${myExtendedParameterBeanClassName}) Execute(tx *sql.Tx) (int64, error) {
-	return bhv.LiTblBhv_I.OutsideSql().Execute(o,tx)
+	return bhv.${pmbMetaData.getOutsideSqlFile().getBhvName()}_I.OutsideSql().Execute(o,tx)
 
 }
 #end

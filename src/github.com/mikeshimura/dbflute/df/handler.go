@@ -70,7 +70,7 @@ type TnBasicSelectHandler struct {
 
 func (t *TnBasicSelectHandler) execute(bindVariables *List, bindVariableTypes *StringList, tx *sql.Tx, behavior *Behavior) (interface{}, error) {
 	dbc := (*(*behavior).GetBaseBehavior().GetBehaviorCommandInvoker().InvokerAssistant).GetDBCurrent()
-
+	fmt.Println("t.sql:"+t.sql)
 	ps, err2 := (*t.statementFactory).PrepareStatement(t.sql, tx, dbc)
 	if err2 != nil {
 		log.InternalDebug("err2:" + err2.Error())
