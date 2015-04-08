@@ -43,12 +43,12 @@ func Create_SummaryProductDbm() {
 	//colsqlname dayoo product_name
 	productNameSqlName.ColumnSqlName = "product_name"
 	productNameSqlName.IrregularChar = false
-	SummaryProductDbm.ColumnProductName = df.CCI(&summaryProduct, "product_name", productNameSqlName, "", "", "String.class", "productName", "", false, false,false, "varchar", 50, 0, "",false,"","", "","","",false,"sql.NullString")
+	SummaryProductDbm.ColumnProductName = df.CCI(&summaryProduct, "product_name", productNameSqlName, "", "", "String.class", "productName", "", false, false,false, "varchar", 50, 0, "",false,"","", "","","",false,"df.NullString")
 	productStatusCodeSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo product_status_code
 	productStatusCodeSqlName.ColumnSqlName = "product_status_code"
 	productStatusCodeSqlName.IrregularChar = false
-	SummaryProductDbm.ColumnProductStatusCode = df.CCI(&summaryProduct, "product_status_code", productStatusCodeSqlName, "", "", "String.class", "productStatusCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "","","",false,"sql.NullString")
+	SummaryProductDbm.ColumnProductStatusCode = df.CCI(&summaryProduct, "product_status_code", productStatusCodeSqlName, "", "", "String.class", "productStatusCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "","","",false,"df.NullString")
 	latestPurchaseDatetimeSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo latest_purchase_datetime
 	latestPurchaseDatetimeSqlName.ColumnSqlName = "latest_purchase_datetime"

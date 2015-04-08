@@ -83,7 +83,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnProductCategoryName = cci("product_category_name", "product_category_name", null, null, String.class, "productCategoryName", null, false, false, true, "varchar", 50, 0, null, false, null, null, null, null, null, false);
 //"string"
     protected final ColumnInfo _columnParentCategoryCode = cci("parent_category_code", "parent_category_code", null, null, String.class, "parentCategoryCode", null, false, false, false, "bpchar", 3, 0, null, false, null, null, "productCategorySelf", null, null, false);
-//"sql.NullString"
+//"df.NullString"
 
     /**
      * product_category_code: {PK, NotNull, bpchar(3)}

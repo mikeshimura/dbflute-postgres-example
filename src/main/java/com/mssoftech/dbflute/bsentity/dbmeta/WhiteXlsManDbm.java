@@ -70,7 +70,7 @@ public class WhiteXlsManDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnXlsManId = cci("xls_man_id", "xls_man_id", null, null, Long.class, "xlsManId", null, true, false, true, "int8", 19, 0, null, false, null, null, null, null, null, false);
 //"int64"
     protected final ColumnInfo _columnStringConverted = cci("string_converted", "string_converted", null, null, String.class, "stringConverted", null, false, false, false, "varchar", 2147483647, 0, null, false, null, null, null, null, null, false);
-//"sql.NullString"
+//"df.NullString"
     protected final ColumnInfo _columnTimestampZeroDefaultMillis = cci("timestamp_zero_default_millis", "timestamp_zero_default_millis", null, null, java.time.LocalDateTime.class, "timestampZeroDefaultMillis", null, false, false, false, "timestamp", 26, 3, null, false, null, null, null, null, null, false);
 //"df.NullTimestamp"
     protected final ColumnInfo _columnTimestampZeroPrefixMillis = cci("timestamp_zero_prefix_millis", "timestamp_zero_prefix_millis", null, null, java.time.LocalDateTime.class, "timestampZeroPrefixMillis", null, false, false, false, "timestamp", 26, 3, null, false, null, null, null, null, null, false);

@@ -42,7 +42,7 @@ func Create_WhiteNotPkDbm() {
 	//colsqlname dayoo not_pk_name
 	notPkNameSqlName.ColumnSqlName = "not_pk_name"
 	notPkNameSqlName.IrregularChar = false
-	WhiteNotPkDbm.ColumnNotPkName = df.CCI(&whiteNotPk, "not_pk_name", notPkNameSqlName, "", "", "String.class", "notPkName", "", false, false,false, "varchar", 2147483647, 0, "",false,"","", "","","",false,"sql.NullString")
+	WhiteNotPkDbm.ColumnNotPkName = df.CCI(&whiteNotPk, "not_pk_name", notPkNameSqlName, "", "", "String.class", "notPkName", "", false, false,false, "varchar", 2147483647, 0, "",false,"","", "","","",false,"df.NullString")
 	notPkIntegerSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo not_pk_integer
 	notPkIntegerSqlName.ColumnSqlName = "not_pk_integer"

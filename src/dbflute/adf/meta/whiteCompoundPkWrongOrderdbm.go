@@ -53,7 +53,7 @@ func Create_WhiteCompoundPkWrongOrderDbm() {
 	//colsqlname dayoo wrong_name
 	wrongNameSqlName.ColumnSqlName = "wrong_name"
 	wrongNameSqlName.IrregularChar = false
-	WhiteCompoundPkWrongOrderDbm.ColumnWrongName = df.CCI(&whiteCompoundPkWrongOrder, "wrong_name", wrongNameSqlName, "", "", "String.class", "wrongName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"sql.NullString")
+	WhiteCompoundPkWrongOrderDbm.ColumnWrongName = df.CCI(&whiteCompoundPkWrongOrder, "wrong_name", wrongNameSqlName, "", "", "String.class", "wrongName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"df.NullString")
 
 	WhiteCompoundPkWrongOrderDbm.ColumnInfoList = new(df.List)
 	WhiteCompoundPkWrongOrderDbm.ColumnInfoList.Add(WhiteCompoundPkWrongOrderDbm.ColumnFirstId)

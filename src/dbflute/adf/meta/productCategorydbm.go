@@ -47,7 +47,7 @@ func Create_ProductCategoryDbm() {
 	//colsqlname dayoo parent_category_code
 	parentCategoryCodeSqlName.ColumnSqlName = "parent_category_code"
 	parentCategoryCodeSqlName.IrregularChar = false
-	ProductCategoryDbm.ColumnParentCategoryCode = df.CCI(&productCategory, "parent_category_code", parentCategoryCodeSqlName, "", "", "String.class", "parentCategoryCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "productCategorySelf","","",false,"sql.NullString")
+	ProductCategoryDbm.ColumnParentCategoryCode = df.CCI(&productCategory, "parent_category_code", parentCategoryCodeSqlName, "", "", "String.class", "parentCategoryCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "productCategorySelf","","",false,"df.NullString")
 
 	ProductCategoryDbm.ColumnInfoList = new(df.List)
 	ProductCategoryDbm.ColumnInfoList.Add(ProductCategoryDbm.ColumnProductCategoryCode)

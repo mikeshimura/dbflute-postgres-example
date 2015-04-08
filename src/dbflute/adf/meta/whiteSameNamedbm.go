@@ -43,7 +43,7 @@ func Create_WhiteSameNameDbm() {
 	//colsqlname dayoo same_name_name
 	sameNameNameSqlName.ColumnSqlName = "same_name_name"
 	sameNameNameSqlName.IrregularChar = false
-	WhiteSameNameDbm.ColumnSameNameName = df.CCI(&whiteSameName, "same_name_name", sameNameNameSqlName, "", "", "String.class", "sameNameName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"sql.NullString")
+	WhiteSameNameDbm.ColumnSameNameName = df.CCI(&whiteSameName, "same_name_name", sameNameNameSqlName, "", "", "String.class", "sameNameName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"df.NullString")
 	sameNameIntegerSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo same_name_integer
 	sameNameIntegerSqlName.ColumnSqlName = "same_name_integer"

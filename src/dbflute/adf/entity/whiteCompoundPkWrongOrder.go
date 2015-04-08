@@ -2,14 +2,13 @@ package entity
 
 import (
 	"github.com/mikeshimura/dbflute/df"
-	"database/sql"
 )
 
 type WhiteCompoundPkWrongOrder struct {
 	firstId int64
 	secondId int64
 	thirdId int64
-	wrongName sql.NullString
+	wrongName df.NullString
 	df.BaseEntity
 }
 
@@ -28,7 +27,7 @@ func (l *WhiteCompoundPkWrongOrder) GetSecondId () int64 {
 func (l *WhiteCompoundPkWrongOrder) GetThirdId () int64 {
 	return l.thirdId
 }
-func (l *WhiteCompoundPkWrongOrder) GetWrongName () sql.NullString {
+func (l *WhiteCompoundPkWrongOrder) GetWrongName () df.NullString {
 	return l.wrongName
 }
 
@@ -70,7 +69,7 @@ func (t *WhiteCompoundPkWrongOrder) SetThirdId(thirdId int64) {
 	t.AddPropertyName("thirdId")
 	t.thirdId = thirdId
 }
-func (t *WhiteCompoundPkWrongOrder) SetWrongName(wrongName sql.NullString) {
+func (t *WhiteCompoundPkWrongOrder) SetWrongName(wrongName df.NullString) {
 	t.AddPropertyName("wrongName")
 	t.wrongName = wrongName
 }

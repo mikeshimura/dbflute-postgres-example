@@ -115,7 +115,7 @@ func TestOutsideSelect(t *testing.T) {
 	}
 	tx, _ := Db.Begin()
 	pmb := new(pmb.C_SelectMemberPmb)
-	pmb.SetName(*new(sql.NullString))
+	pmb.SetName(*new(df.NullString))
 	l, err1 := pmb.SelectList(tx)
 	if err1!=nil{
 		log.ErrorConv("test",err1.Error())

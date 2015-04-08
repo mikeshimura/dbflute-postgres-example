@@ -117,62 +117,6 @@ func init() {
 	var summaryProduct df.Behavior =SummaryProductBhv_I
 	SummaryProductBhv_I.BaseBehavior.Behavior=&summaryProduct
 	SummaryProductBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorDateFkBhv_I = new(VendorDateFkBhv)
-	VendorDateFkBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorDateFkBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorDateFkBhv_I.BaseBehavior.TableDbName = "VendorDateFk"
-	var vendorDateFk df.Behavior =VendorDateFkBhv_I
-	VendorDateFkBhv_I.BaseBehavior.Behavior=&vendorDateFk
-	VendorDateFkBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorDatePkBhv_I = new(VendorDatePkBhv)
-	VendorDatePkBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorDatePkBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorDatePkBhv_I.BaseBehavior.TableDbName = "VendorDatePk"
-	var vendorDatePk df.Behavior =VendorDatePkBhv_I
-	VendorDatePkBhv_I.BaseBehavior.Behavior=&vendorDatePk
-	VendorDatePkBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorInheritInuBhv_I = new(VendorInheritInuBhv)
-	VendorInheritInuBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorInheritInuBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorInheritInuBhv_I.BaseBehavior.TableDbName = "VendorInheritInu"
-	var vendorInheritInu df.Behavior =VendorInheritInuBhv_I
-	VendorInheritInuBhv_I.BaseBehavior.Behavior=&vendorInheritInu
-	VendorInheritInuBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorInheritNekoBhv_I = new(VendorInheritNekoBhv)
-	VendorInheritNekoBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorInheritNekoBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorInheritNekoBhv_I.BaseBehavior.TableDbName = "VendorInheritNeko"
-	var vendorInheritNeko df.Behavior =VendorInheritNekoBhv_I
-	VendorInheritNekoBhv_I.BaseBehavior.Behavior=&vendorInheritNeko
-	VendorInheritNekoBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorLargeDataBhv_I = new(VendorLargeDataBhv)
-	VendorLargeDataBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorLargeDataBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorLargeDataBhv_I.BaseBehavior.TableDbName = "VendorLargeData"
-	var vendorLargeData df.Behavior =VendorLargeDataBhv_I
-	VendorLargeDataBhv_I.BaseBehavior.Behavior=&vendorLargeData
-	VendorLargeDataBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorLargeDataRefBhv_I = new(VendorLargeDataRefBhv)
-	VendorLargeDataRefBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorLargeDataRefBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorLargeDataRefBhv_I.BaseBehavior.TableDbName = "VendorLargeDataRef"
-	var vendorLargeDataRef df.Behavior =VendorLargeDataRefBhv_I
-	VendorLargeDataRefBhv_I.BaseBehavior.Behavior=&vendorLargeDataRef
-	VendorLargeDataRefBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorPartManBhv_I = new(VendorPartManBhv)
-	VendorPartManBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorPartManBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorPartManBhv_I.BaseBehavior.TableDbName = "VendorPartMan"
-	var vendorPartMan df.Behavior =VendorPartManBhv_I
-	VendorPartManBhv_I.BaseBehavior.Behavior=&vendorPartMan
-	VendorPartManBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
-	VendorPartManHighBhv_I = new(VendorPartManHighBhv)
-	VendorPartManHighBhv_I.BaseBehavior = new(df.BaseBehavior)
-	VendorPartManHighBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
-	VendorPartManHighBhv_I.BaseBehavior.TableDbName = "VendorPartManHigh"
-	var vendorPartManHigh df.Behavior =VendorPartManHighBhv_I
-	VendorPartManHighBhv_I.BaseBehavior.Behavior=&vendorPartManHigh
-	VendorPartManHighBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
 	WhiteCompoundPkBhv_I = new(WhiteCompoundPkBhv)
 	WhiteCompoundPkBhv_I.BaseBehavior = new(df.BaseBehavior)
 	WhiteCompoundPkBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()

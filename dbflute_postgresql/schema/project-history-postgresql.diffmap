@@ -1,4 +1,45 @@
 map:{
+    ; 2015/04/08 10:08:53 = map:{
+        ; diffDate = 2015/04/08 10:08:53
+        ; tableCount = map:{
+            ; next = 23
+            ; previous = 31
+        }
+        ; tableDiff = map:{
+            ; vendor_date_fk = map:{
+                ; tableName = vendor_date_fk
+                ; diffType = DELETE
+            }
+            ; vendor_date_pk = map:{
+                ; tableName = vendor_date_pk
+                ; diffType = DELETE
+            }
+            ; vendor_inherit_inu = map:{
+                ; tableName = vendor_inherit_inu
+                ; diffType = DELETE
+            }
+            ; vendor_inherit_neko = map:{
+                ; tableName = vendor_inherit_neko
+                ; diffType = DELETE
+            }
+            ; vendor_large_data = map:{
+                ; tableName = vendor_large_data
+                ; diffType = DELETE
+            }
+            ; vendor_large_data_ref = map:{
+                ; tableName = vendor_large_data_ref
+                ; diffType = DELETE
+            }
+            ; vendor_part_man = map:{
+                ; tableName = vendor_part_man
+                ; diffType = DELETE
+            }
+            ; vendor_part_man_high = map:{
+                ; tableName = vendor_part_man_high
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2015/04/06 17:38:20 = map:{
         ; diffDate = 2015/04/06 17:38:20
         ; tableCount = map:{

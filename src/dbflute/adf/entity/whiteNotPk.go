@@ -7,7 +7,7 @@ import (
 
 type WhiteNotPk struct {
 	notPkId int64
-	notPkName sql.NullString
+	notPkName df.NullString
 	notPkInteger sql.NullInt64
 	df.BaseEntity
 }
@@ -21,7 +21,7 @@ func CreateWhiteNotPk() *WhiteNotPk{
 func (l *WhiteNotPk) GetNotPkId () int64 {
 	return l.notPkId
 }
-func (l *WhiteNotPk) GetNotPkName () sql.NullString {
+func (l *WhiteNotPk) GetNotPkName () df.NullString {
 	return l.notPkName
 }
 func (l *WhiteNotPk) GetNotPkInteger () sql.NullInt64 {
@@ -48,7 +48,7 @@ func (t *WhiteNotPk) SetNotPkId(notPkId int64) {
 	t.AddPropertyName("notPkId")
 	t.notPkId = notPkId
 }
-func (t *WhiteNotPk) SetNotPkName(notPkName sql.NullString) {
+func (t *WhiteNotPk) SetNotPkName(notPkName df.NullString) {
 	t.AddPropertyName("notPkName")
 	t.notPkName = notPkName
 }

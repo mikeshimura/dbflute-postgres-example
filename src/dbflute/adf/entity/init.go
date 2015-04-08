@@ -95,54 +95,6 @@ func EntityInit() {
 		return &te
 	}
 	df.BhvUtil_I.AddEntity("SummaryProduct", SummaryProduct)
-	VendorDateFk := func() *df.Entity {
-		var te df.Entity = new(VendorDateFk)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorDateFk", VendorDateFk)
-	VendorDatePk := func() *df.Entity {
-		var te df.Entity = new(VendorDatePk)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorDatePk", VendorDatePk)
-	VendorInheritInu := func() *df.Entity {
-		var te df.Entity = new(VendorInheritInu)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorInheritInu", VendorInheritInu)
-	VendorInheritNeko := func() *df.Entity {
-		var te df.Entity = new(VendorInheritNeko)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorInheritNeko", VendorInheritNeko)
-	VendorLargeData := func() *df.Entity {
-		var te df.Entity = new(VendorLargeData)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorLargeData", VendorLargeData)
-	VendorLargeDataRef := func() *df.Entity {
-		var te df.Entity = new(VendorLargeDataRef)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorLargeDataRef", VendorLargeDataRef)
-	VendorPartMan := func() *df.Entity {
-		var te df.Entity = new(VendorPartMan)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorPartMan", VendorPartMan)
-	VendorPartManHigh := func() *df.Entity {
-		var te df.Entity = new(VendorPartManHigh)
-		te.SetUp()
-		return &te
-	}
-	df.BhvUtil_I.AddEntity("VendorPartManHigh", VendorPartManHigh)
 	WhiteCompoundPk := func() *df.Entity {
 		var te df.Entity = new(WhiteCompoundPk)
 		te.SetUp()

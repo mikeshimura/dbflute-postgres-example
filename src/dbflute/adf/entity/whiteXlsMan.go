@@ -2,12 +2,11 @@ package entity
 
 import (
 	"github.com/mikeshimura/dbflute/df"
-	"database/sql"
 )
 
 type WhiteXlsMan struct {
 	xlsManId int64
-	stringConverted sql.NullString
+	stringConverted df.NullString
 	timestampZeroDefaultMillis df.NullTimestamp
 	timestampZeroPrefixMillis df.NullTimestamp
 	timestampZeroSuffixMillis df.NullTimestamp
@@ -23,7 +22,7 @@ func CreateWhiteXlsMan() *WhiteXlsMan{
 func (l *WhiteXlsMan) GetXlsManId () int64 {
 	return l.xlsManId
 }
-func (l *WhiteXlsMan) GetStringConverted () sql.NullString {
+func (l *WhiteXlsMan) GetStringConverted () df.NullString {
 	return l.stringConverted
 }
 func (l *WhiteXlsMan) GetTimestampZeroDefaultMillis () df.NullTimestamp {
@@ -61,7 +60,7 @@ func (t *WhiteXlsMan) SetXlsManId(xlsManId int64) {
 	t.AddPropertyName("xlsManId")
 	t.xlsManId = xlsManId
 }
-func (t *WhiteXlsMan) SetStringConverted(stringConverted sql.NullString) {
+func (t *WhiteXlsMan) SetStringConverted(stringConverted df.NullString) {
 	t.AddPropertyName("stringConverted")
 	t.stringConverted = stringConverted
 }

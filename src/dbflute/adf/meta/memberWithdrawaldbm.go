@@ -49,12 +49,12 @@ func Create_MemberWithdrawalDbm() {
 	//colsqlname dayoo withdrawal_reason_code
 	withdrawalReasonCodeSqlName.ColumnSqlName = "withdrawal_reason_code"
 	withdrawalReasonCodeSqlName.IrregularChar = false
-	MemberWithdrawalDbm.ColumnWithdrawalReasonCode = df.CCI(&memberWithdrawal, "withdrawal_reason_code", withdrawalReasonCodeSqlName, "", "", "String.class", "withdrawalReasonCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "withdrawalReason","","",false,"sql.NullString")
+	MemberWithdrawalDbm.ColumnWithdrawalReasonCode = df.CCI(&memberWithdrawal, "withdrawal_reason_code", withdrawalReasonCodeSqlName, "", "", "String.class", "withdrawalReasonCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "withdrawalReason","","",false,"df.NullString")
 	withdrawalReasonInputTextSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo withdrawal_reason_input_text
 	withdrawalReasonInputTextSqlName.ColumnSqlName = "withdrawal_reason_input_text"
 	withdrawalReasonInputTextSqlName.IrregularChar = false
-	MemberWithdrawalDbm.ColumnWithdrawalReasonInputText = df.CCI(&memberWithdrawal, "withdrawal_reason_input_text", withdrawalReasonInputTextSqlName, "", "", "String.class", "withdrawalReasonInputText", "", false, false,false, "text", 2147483647, 0, "",false,"","", "","","",false,"sql.NullString")
+	MemberWithdrawalDbm.ColumnWithdrawalReasonInputText = df.CCI(&memberWithdrawal, "withdrawal_reason_input_text", withdrawalReasonInputTextSqlName, "", "", "String.class", "withdrawalReasonInputText", "", false, false,false, "text", 2147483647, 0, "",false,"","", "","","",false,"df.NullString")
 	withdrawalDatetimeSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo withdrawal_datetime
 	withdrawalDatetimeSqlName.ColumnSqlName = "withdrawal_datetime"

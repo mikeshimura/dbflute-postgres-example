@@ -65,38 +65,6 @@ func MetaInit() {
 	var SummaryProduct_meta df.DBMeta = SummaryProductDbm
 	df.DBMetaProvider_I.TableDbNameInstanceMap["SummaryProduct"] = &SummaryProduct_meta
 	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("SummaryProduct", "SummaryProduct")
-	Create_VendorDateFkDbm()
-	var VendorDateFk_meta df.DBMeta = VendorDateFkDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorDateFk"] = &VendorDateFk_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorDateFk", "VendorDateFk")
-	Create_VendorDatePkDbm()
-	var VendorDatePk_meta df.DBMeta = VendorDatePkDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorDatePk"] = &VendorDatePk_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorDatePk", "VendorDatePk")
-	Create_VendorInheritInuDbm()
-	var VendorInheritInu_meta df.DBMeta = VendorInheritInuDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorInheritInu"] = &VendorInheritInu_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorInheritInu", "VendorInheritInu")
-	Create_VendorInheritNekoDbm()
-	var VendorInheritNeko_meta df.DBMeta = VendorInheritNekoDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorInheritNeko"] = &VendorInheritNeko_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorInheritNeko", "VendorInheritNeko")
-	Create_VendorLargeDataDbm()
-	var VendorLargeData_meta df.DBMeta = VendorLargeDataDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorLargeData"] = &VendorLargeData_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorLargeData", "VendorLargeData")
-	Create_VendorLargeDataRefDbm()
-	var VendorLargeDataRef_meta df.DBMeta = VendorLargeDataRefDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorLargeDataRef"] = &VendorLargeDataRef_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorLargeDataRef", "VendorLargeDataRef")
-	Create_VendorPartManDbm()
-	var VendorPartMan_meta df.DBMeta = VendorPartManDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorPartMan"] = &VendorPartMan_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorPartMan", "VendorPartMan")
-	Create_VendorPartManHighDbm()
-	var VendorPartManHigh_meta df.DBMeta = VendorPartManHighDbm
-	df.DBMetaProvider_I.TableDbNameInstanceMap["VendorPartManHigh"] = &VendorPartManHigh_meta
-	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("VendorPartManHigh", "VendorPartManHigh")
 	Create_WhiteCompoundPkDbm()
 	var WhiteCompoundPk_meta df.DBMeta = WhiteCompoundPkDbm
 	df.DBMetaProvider_I.TableDbNameInstanceMap["WhiteCompoundPk"] = &WhiteCompoundPk_meta

@@ -44,7 +44,7 @@ func Create_WhiteXlsManDbm() {
 	//colsqlname dayoo string_converted
 	stringConvertedSqlName.ColumnSqlName = "string_converted"
 	stringConvertedSqlName.IrregularChar = false
-	WhiteXlsManDbm.ColumnStringConverted = df.CCI(&whiteXlsMan, "string_converted", stringConvertedSqlName, "", "", "String.class", "stringConverted", "", false, false,false, "varchar", 2147483647, 0, "",false,"","", "","","",false,"sql.NullString")
+	WhiteXlsManDbm.ColumnStringConverted = df.CCI(&whiteXlsMan, "string_converted", stringConvertedSqlName, "", "", "String.class", "stringConverted", "", false, false,false, "varchar", 2147483647, 0, "",false,"","", "","","",false,"df.NullString")
 	timestampZeroDefaultMillisSqlName := new(df.ColumnSqlName)
 	//colsqlname dayoo timestamp_zero_default_millis
 	timestampZeroDefaultMillisSqlName.ColumnSqlName = "timestamp_zero_default_millis"

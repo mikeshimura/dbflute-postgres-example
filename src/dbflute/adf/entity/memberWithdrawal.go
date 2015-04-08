@@ -2,13 +2,12 @@ package entity
 
 import (
 	"github.com/mikeshimura/dbflute/df"
-	"database/sql"
 )
 
 type MemberWithdrawal struct {
 	memberId int64
-	withdrawalReasonCode sql.NullString
-	withdrawalReasonInputText sql.NullString
+	withdrawalReasonCode df.NullString
+	withdrawalReasonInputText df.NullString
 	withdrawalDatetime df.Timestamp
 	registerDatetime df.Timestamp
 	registerProcess string
@@ -28,10 +27,10 @@ func CreateMemberWithdrawal() *MemberWithdrawal{
 func (l *MemberWithdrawal) GetMemberId () int64 {
 	return l.memberId
 }
-func (l *MemberWithdrawal) GetWithdrawalReasonCode () sql.NullString {
+func (l *MemberWithdrawal) GetWithdrawalReasonCode () df.NullString {
 	return l.withdrawalReasonCode
 }
-func (l *MemberWithdrawal) GetWithdrawalReasonInputText () sql.NullString {
+func (l *MemberWithdrawal) GetWithdrawalReasonInputText () df.NullString {
 	return l.withdrawalReasonInputText
 }
 func (l *MemberWithdrawal) GetWithdrawalDatetime () df.Timestamp {
@@ -86,11 +85,11 @@ func (t *MemberWithdrawal) SetMemberId(memberId int64) {
 	t.AddPropertyName("memberId")
 	t.memberId = memberId
 }
-func (t *MemberWithdrawal) SetWithdrawalReasonCode(withdrawalReasonCode sql.NullString) {
+func (t *MemberWithdrawal) SetWithdrawalReasonCode(withdrawalReasonCode df.NullString) {
 	t.AddPropertyName("withdrawalReasonCode")
 	t.withdrawalReasonCode = withdrawalReasonCode
 }
-func (t *MemberWithdrawal) SetWithdrawalReasonInputText(withdrawalReasonInputText sql.NullString) {
+func (t *MemberWithdrawal) SetWithdrawalReasonInputText(withdrawalReasonInputText df.NullString) {
 	t.AddPropertyName("withdrawalReasonInputText")
 	t.withdrawalReasonInputText = withdrawalReasonInputText
 }
