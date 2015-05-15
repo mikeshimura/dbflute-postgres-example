@@ -7,7 +7,7 @@ import (
 
 type WhiteSameName struct {
 	sameNameId int64
-	sameNameName df.NullString
+	sameNameName sql.NullString
 	sameNameInteger sql.NullInt64
 	nextSchemaProductId sql.NullInt64
 	df.BaseEntity
@@ -22,7 +22,7 @@ func CreateWhiteSameName() *WhiteSameName{
 func (l *WhiteSameName) GetSameNameId () int64 {
 	return l.sameNameId
 }
-func (l *WhiteSameName) GetSameNameName () df.NullString {
+func (l *WhiteSameName) GetSameNameName () sql.NullString {
 	return l.sameNameName
 }
 func (l *WhiteSameName) GetSameNameInteger () sql.NullInt64 {
@@ -56,7 +56,7 @@ func (t *WhiteSameName) SetSameNameId(sameNameId int64) {
 	t.AddPropertyName("sameNameId")
 	t.sameNameId = sameNameId
 }
-func (t *WhiteSameName) SetSameNameName(sameNameName df.NullString) {
+func (t *WhiteSameName) SetSameNameName(sameNameName sql.NullString) {
 	t.AddPropertyName("sameNameName")
 	t.sameNameName = sameNameName
 }
@@ -68,7 +68,6 @@ func (t *WhiteSameName) SetNextSchemaProductId(nextSchemaProductId sql.NullInt64
 	t.AddPropertyName("nextSchemaProductId")
 	t.nextSchemaProductId = nextSchemaProductId
 }
-
 func (t *WhiteSameName) SetUp(){
 	
 }

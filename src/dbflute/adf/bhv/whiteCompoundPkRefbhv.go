@@ -18,27 +18,31 @@ func (l *WhiteCompoundPkRefBhv) GetDBMeta() *df.DBMeta{
 func (l *WhiteCompoundPkRefBhv) GetBaseBehavior() *df.BaseBehavior {
 	return l.BaseBehavior
 }
-func (l *WhiteCompoundPkRefBhv) Update(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx) (int64, error) {
+func (l *WhiteCompoundPkRefBhv) Update(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteCompoundPkRef
-	return l.BaseBehavior.DoUpdate(&entity, nil, tx)
+	return l.BaseBehavior.DoUpdate(&entity, nil, tx, ctx)
 }
-func (l *WhiteCompoundPkRefBhv) Insert(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx) (int64, error) {
+func (l *WhiteCompoundPkRefBhv) Insert(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteCompoundPkRef
-	return l.BaseBehavior.DoInsert(&entity, nil, tx)
+	return l.BaseBehavior.DoInsert(&entity, nil, tx, ctx)
 }
-func (l *WhiteCompoundPkRefBhv) Delete(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx) (int64, error) {
+func (l *WhiteCompoundPkRefBhv) Delete(whiteCompoundPkRef *entity.WhiteCompoundPkRef, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteCompoundPkRef
-	return l.BaseBehavior.DoDelete(&entity, nil, tx)
+	return l.BaseBehavior.DoDelete(&entity, nil, tx, ctx)
 }
 func (l *WhiteCompoundPkRefBhv) SelectList(cb *cb.WhiteCompoundPkRefCB, tx *sql.Tx) (*df.ListResultBean, error) {
 
 	return l.BaseBehavior.DoSelectList(cb, "WhiteCompoundPkRef", tx)
 }
+func (l *WhiteCompoundPkRefBhv) SelectCount(cb *cb.WhiteCompoundPkRefCB, tx *sql.Tx) (int64, error) {
+
+	return l.BaseBehavior.DoSelectCount(cb, tx)
+}
 func (l *WhiteCompoundPkRefBhv) OutsideSql() *df.OutsideSqlBasicExecutor {
 	return l.BaseBehavior.DoOutsideSql()
 }
 
-func (l *WhiteCompoundPkRefBhv) ReadNextVal(tx *sql.Tx) (int64,error){
+func (l *WhiteCompoundPkRefBhv) ReadNextVal(tx *sql.Tx) int64{
 	return l.BaseBehavior.DoSelectNextVal(tx)
 }
 

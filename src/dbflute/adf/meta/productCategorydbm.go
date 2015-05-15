@@ -14,6 +14,20 @@ type ProductCategoryDbm_T struct {
 func (b *ProductCategoryDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *ProductCategoryDbm_T) foreignProductCategorySelf() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		ProductCategoryDbm.GetColumnInfoByPropertyName("parentCategoryCode"),
+		ProductCategoryDbm.GetColumnInfoByPropertyName("productCategoryCode"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_product_category_parent", "ProductCategorySelf",
+		columns, 0, false, false, false, false,
+		"", nil, false, "productCategorySelfList")
+}	
+func (b *ProductCategoryDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["ProductCategorySelf"] = b.foreignProductCategorySelf()
+}
 
 func (b *ProductCategoryDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -34,20 +48,17 @@ func Create_ProductCategoryDbm() {
 	productCategory = ProductCategoryDbm
 	ProductCategoryDbm.DBMeta=&productCategory
 	productCategoryCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_category_code
 	productCategoryCodeSqlName.ColumnSqlName = "product_category_code"
 	productCategoryCodeSqlName.IrregularChar = false
 	ProductCategoryDbm.ColumnProductCategoryCode = df.CCI(&productCategory, "product_category_code", productCategoryCodeSqlName, "", "", "String.class", "productCategoryCode", "", true, false,true, "bpchar", 3, 0, "",false,"","", "","productList,productCategorySelfList","",false,"string")
 	productCategoryNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_category_name
 	productCategoryNameSqlName.ColumnSqlName = "product_category_name"
 	productCategoryNameSqlName.IrregularChar = false
 	ProductCategoryDbm.ColumnProductCategoryName = df.CCI(&productCategory, "product_category_name", productCategoryNameSqlName, "", "", "String.class", "productCategoryName", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")
 	parentCategoryCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo parent_category_code
 	parentCategoryCodeSqlName.ColumnSqlName = "parent_category_code"
 	parentCategoryCodeSqlName.IrregularChar = false
-	ProductCategoryDbm.ColumnParentCategoryCode = df.CCI(&productCategory, "parent_category_code", parentCategoryCodeSqlName, "", "", "String.class", "parentCategoryCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "productCategorySelf","","",false,"df.NullString")
+	ProductCategoryDbm.ColumnParentCategoryCode = df.CCI(&productCategory, "parent_category_code", parentCategoryCodeSqlName, "", "", "String.class", "parentCategoryCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "productCategorySelf","","",false,"sql.NullString")
 
 	ProductCategoryDbm.ColumnInfoList = new(df.List)
 	ProductCategoryDbm.ColumnInfoList.Add(ProductCategoryDbm.ColumnProductCategoryCode)

@@ -10,43 +10,44 @@
 #
 # Example:
 # map:{
-#     ; commonColumnMap = map:{
-#         ; REGISTER_DATETIME=TIMESTAMP ; REGISTER_USER=VARCHAR
-#         ; UPDATE_DATETIME=TIMESTAMP   ; UPDATE_USER=VARCHAR
-#     }
-#     ; beforeInsertMap = map:{
-#         ; REGISTER_DATETIME = $$AccessContext$$.getAccessTimestampOnThread()
-#         ; REGISTER_USER     = $$AccessContext$$.getAccessUserOnThread()
-#         ; UPDATE_DATETIME   = entity.getRegisterDatetime()
-#         ; UPDATE_USER       = entity.getRegisterUser()
-#     }
-#     ; beforeUpdateMap = map:{
-#         ; UPDATE_DATETIME   = $$AccessContext$$.getAccessTimestampOnThread()
-#         ; UPDATE_USER       = $$AccessContext$$.getAccessUserOnThread()
-#     }
+#    ; importMap = map:{
+#        ; import1=time
+#    }
+#    ; beforeInsertMap = map:{
+#        ; registerDatetime = df.CreateTimestamp(time.Now())
+#        ; registerUser     = context.Get("User")
+#        ; registerProcess  = context.Get("Process")
+#        ; updateDatetime   = df.GetEntityValue(entity, "registerDatetime")
+#        ; updateUser       = df.GetEntityValue(entity, "registerUser")
+#        ; updateProcess    = df.GetEntityValue(entity, "registerProcess")
+#    }
+#    ; beforeUpdateMap = map:{
+#        ; updateDatetime   = df.CreateTimestamp(time.Now())
+#        ; updateUser       = context.Get("User")
+#        ; updateProcess    = context.Get("Process")
+#    }
 # }
 #
 # *The line that starts with '#' means comment-out.
 #
 map:{
-#    ; commonColumnMap = map:{
-#        ; register_datetime=TIMESTAMP ; register_user=VARCHAR ; register_process=VARCHAR
-#        ; update_datetime=TIMESTAMP   ; update_user=VARCHAR   ; update_process=VARCHAR
-#    }
-#    ; beforeInsertMap = map:{
-#        ; register_datetime = $$AccessContext$$.getAccessLocalDateTimeOnThread()
-#        ; register_user     = $$AccessContext$$.getAccessUserOnThread()
-#        ; register_process  = $$AccessContext$$.getAccessProcessOnThread()
-#        ; update_datetime   = entity.getRegisterDatetime()
-#        ; update_user       = entity.getRegisterUser()
-#        ; update_process    = entity.getRegisterProcess()
-#    }
-#    ; beforeUpdateMap = map:{
-#        ; update_datetime   = $$AccessContext$$.getAccessLocalDateTimeOnThread()
-#        ; update_user       = $$AccessContext$$.getAccessUserOnThread()
-#        ; update_process    = $$AccessContext$$.getAccessProcessOnThread()
-#    }
+    ; importMap = map:{
+        ; import1=time
+    }
+    ; beforeInsertMap = map:{
+        ; registerDatetime = df.CreateTimestamp(time.Now())
+        ; registerUser     = context.Get("User")
+        ; registerProcess  = context.Get("Process")
+        ; updateDatetime   = df.GetEntityValue(entity, "registerDatetime")
+        ; updateUser       = df.GetEntityValue(entity, "registerUser")
+        ; updateProcess    = df.GetEntityValue(entity, "registerProcess")
+    }
+    ; beforeUpdateMap = map:{
+        ; updateDatetime   = df.CreateTimestamp(time.Now())
+        ; updateUser       = context.Get("User")
+        ; updateProcess    = context.Get("Process")
+    }
 }
 # ----------------/
 #
-# *Refer to typeMappingMap.dfprop for JDBC type reference.
+

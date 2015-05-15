@@ -15,6 +15,9 @@ type WhiteCompoundPkWrongOrderDbm_T struct {
 func (b *WhiteCompoundPkWrongOrderDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *WhiteCompoundPkWrongOrderDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *WhiteCompoundPkWrongOrderDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -35,25 +38,21 @@ func Create_WhiteCompoundPkWrongOrderDbm() {
 	whiteCompoundPkWrongOrder = WhiteCompoundPkWrongOrderDbm
 	WhiteCompoundPkWrongOrderDbm.DBMeta=&whiteCompoundPkWrongOrder
 	firstIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo first_id
 	firstIdSqlName.ColumnSqlName = "first_id"
 	firstIdSqlName.IrregularChar = false
 	WhiteCompoundPkWrongOrderDbm.ColumnFirstId = df.CCI(&whiteCompoundPkWrongOrder, "first_id", firstIdSqlName, "", "", "Integer.class", "firstId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	secondIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo second_id
 	secondIdSqlName.ColumnSqlName = "second_id"
 	secondIdSqlName.IrregularChar = false
 	WhiteCompoundPkWrongOrderDbm.ColumnSecondId = df.CCI(&whiteCompoundPkWrongOrder, "second_id", secondIdSqlName, "", "", "Integer.class", "secondId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	thirdIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo third_id
 	thirdIdSqlName.ColumnSqlName = "third_id"
 	thirdIdSqlName.IrregularChar = false
 	WhiteCompoundPkWrongOrderDbm.ColumnThirdId = df.CCI(&whiteCompoundPkWrongOrder, "third_id", thirdIdSqlName, "", "", "Integer.class", "thirdId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	wrongNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo wrong_name
 	wrongNameSqlName.ColumnSqlName = "wrong_name"
 	wrongNameSqlName.IrregularChar = false
-	WhiteCompoundPkWrongOrderDbm.ColumnWrongName = df.CCI(&whiteCompoundPkWrongOrder, "wrong_name", wrongNameSqlName, "", "", "String.class", "wrongName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"df.NullString")
+	WhiteCompoundPkWrongOrderDbm.ColumnWrongName = df.CCI(&whiteCompoundPkWrongOrder, "wrong_name", wrongNameSqlName, "", "", "String.class", "wrongName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"sql.NullString")
 
 	WhiteCompoundPkWrongOrderDbm.ColumnInfoList = new(df.List)
 	WhiteCompoundPkWrongOrderDbm.ColumnInfoList.Add(WhiteCompoundPkWrongOrderDbm.ColumnFirstId)

@@ -10,6 +10,8 @@ type WhiteCompoundPkRef struct {
 	refFirstId int64
 	refSecondId int64
 	df.BaseEntity
+WhiteCompoundPk_R  *WhiteCompoundPk
+
 }
 
 func CreateWhiteCompoundPkRef() *WhiteCompoundPkRef{
@@ -70,7 +72,12 @@ func (t *WhiteCompoundPkRef) SetRefSecondId(refSecondId int64) {
 	t.AddPropertyName("refSecondId")
 	t.refSecondId = refSecondId
 }
-
+func (t *WhiteCompoundPkRef) GetWhiteCompoundPk_R() *WhiteCompoundPk{
+	return t.WhiteCompoundPk_R
+}
+func (t *WhiteCompoundPkRef) SetWhiteCompoundPk_R(value *WhiteCompoundPk) {
+    t.WhiteCompoundPk_R = value
+}
 func (t *WhiteCompoundPkRef) SetUp(){
 	
 }

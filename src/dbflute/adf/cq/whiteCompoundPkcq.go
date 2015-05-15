@@ -29,7 +29,10 @@ func (q *WhiteCompoundPkCQ) SetPkFirstId_Equal(value int64) *WhiteCompoundPkCQ {
 	q.regPkFirstId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteCompoundPkCQ) SetPkFirstId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePkFirstId(), "pkFirstId")
+}
 func (q *WhiteCompoundPkCQ) SetPkFirstId_NotEqual(value int64) *WhiteCompoundPkCQ {
 	q.regPkFirstId(df.CK_NE_C, value)
 	return q
@@ -95,7 +98,10 @@ func (q *WhiteCompoundPkCQ) SetPkSecondId_Equal(value int64) *WhiteCompoundPkCQ 
 	q.regPkSecondId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteCompoundPkCQ) SetPkSecondId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePkSecondId(), "pkSecondId")
+}
 func (q *WhiteCompoundPkCQ) SetPkSecondId_NotEqual(value int64) *WhiteCompoundPkCQ {
 	q.regPkSecondId(df.CK_NE_C, value)
 	return q
@@ -160,7 +166,10 @@ func (q *WhiteCompoundPkCQ) SetPkName_Equal(value string) *WhiteCompoundPkCQ {
 	q.regPkName(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *WhiteCompoundPkCQ) SetPkName_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePkName(), "pkName")
+}
 func (q *WhiteCompoundPkCQ) SetPkName_NotEqual(value string) *WhiteCompoundPkCQ {
 	q.regPkName(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -214,3 +223,18 @@ func (q *WhiteCompoundPkCQ) regPkName(key *df.ConditionKey, value interface{}) {
 	q.BaseConditionQuery.RegQ(key, value, q.PkName, "pkName")
 }
 
+
+func CreateWhiteCompoundPkCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteCompoundPkCQ {
+	cq := new(WhiteCompoundPkCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteCompoundPk"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

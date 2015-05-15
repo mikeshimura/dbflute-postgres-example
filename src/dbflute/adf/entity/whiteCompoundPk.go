@@ -61,7 +61,6 @@ func (t *WhiteCompoundPk) SetPkName(pkName string) {
 	t.AddPropertyName("pkName")
 	t.pkName = pkName
 }
-
 func (t *WhiteCompoundPk) SetUp(){
 	
 }

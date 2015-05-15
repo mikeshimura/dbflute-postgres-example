@@ -19,6 +19,8 @@ type ProductCQ struct {
 	UpdateUser *df.ConditionValue
 	UpdateProcess *df.ConditionValue
 	VersionNo *df.ConditionValue
+    conditionQueryProductCategory *ProductCategoryCQ
+    conditionQueryProductStatus *ProductStatusCQ
 }
 
 func (q *ProductCQ) GetBaseConditionQuery() *df.BaseConditionQuery{
@@ -39,7 +41,10 @@ func (q *ProductCQ) SetProductId_Equal(value int64) *ProductCQ {
 	q.regProductId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *ProductCQ) SetProductId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductId(), "productId")
+}
 func (q *ProductCQ) SetProductId_NotEqual(value int64) *ProductCQ {
 	q.regProductId(df.CK_NE_C, value)
 	return q
@@ -104,7 +109,10 @@ func (q *ProductCQ) SetProductName_Equal(value string) *ProductCQ {
 	q.regProductName(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetProductName_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductName(), "productName")
+}
 func (q *ProductCQ) SetProductName_NotEqual(value string) *ProductCQ {
 	q.regProductName(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -170,7 +178,10 @@ func (q *ProductCQ) SetProductHandleCode_Equal(value string) *ProductCQ {
 	q.regProductHandleCode(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetProductHandleCode_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductHandleCode(), "productHandleCode")
+}
 func (q *ProductCQ) SetProductHandleCode_NotEqual(value string) *ProductCQ {
 	q.regProductHandleCode(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -236,7 +247,10 @@ func (q *ProductCQ) SetProductCategoryCode_Equal(value string) *ProductCQ {
 	q.regProductCategoryCode(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetProductCategoryCode_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductCategoryCode(), "productCategoryCode")
+}
 func (q *ProductCQ) SetProductCategoryCode_NotEqual(value string) *ProductCQ {
 	q.regProductCategoryCode(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -302,7 +316,10 @@ func (q *ProductCQ) SetProductStatusCode_Equal(value string) *ProductCQ {
 	q.regProductStatusCode(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetProductStatusCode_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductStatusCode(), "productStatusCode")
+}
 func (q *ProductCQ) SetProductStatusCode_NotEqual(value string) *ProductCQ {
 	q.regProductStatusCode(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -369,7 +386,10 @@ func (q *ProductCQ) SetRegularPrice_Equal(value int64) *ProductCQ {
 	q.regRegularPrice(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *ProductCQ) SetRegularPrice_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueRegularPrice(), "regularPrice")
+}
 func (q *ProductCQ) SetRegularPrice_NotEqual(value int64) *ProductCQ {
 	q.regRegularPrice(df.CK_NE_C, value)
 	return q
@@ -477,7 +497,10 @@ func (q *ProductCQ) SetRegisterUser_Equal(value string) *ProductCQ {
 	q.regRegisterUser(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetRegisterUser_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueRegisterUser(), "registerUser")
+}
 func (q *ProductCQ) SetRegisterUser_NotEqual(value string) *ProductCQ {
 	q.regRegisterUser(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -543,7 +566,10 @@ func (q *ProductCQ) SetRegisterProcess_Equal(value string) *ProductCQ {
 	q.regRegisterProcess(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetRegisterProcess_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueRegisterProcess(), "registerProcess")
+}
 func (q *ProductCQ) SetRegisterProcess_NotEqual(value string) *ProductCQ {
 	q.regRegisterProcess(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -660,7 +686,10 @@ func (q *ProductCQ) SetUpdateUser_Equal(value string) *ProductCQ {
 	q.regUpdateUser(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetUpdateUser_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueUpdateUser(), "updateUser")
+}
 func (q *ProductCQ) SetUpdateUser_NotEqual(value string) *ProductCQ {
 	q.regUpdateUser(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -726,7 +755,10 @@ func (q *ProductCQ) SetUpdateProcess_Equal(value string) *ProductCQ {
 	q.regUpdateProcess(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *ProductCQ) SetUpdateProcess_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueUpdateProcess(), "updateProcess")
+}
 func (q *ProductCQ) SetUpdateProcess_NotEqual(value string) *ProductCQ {
 	q.regUpdateProcess(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -793,7 +825,10 @@ func (q *ProductCQ) SetVersionNo_Equal(value int64) *ProductCQ {
 	q.regVersionNo(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *ProductCQ) SetVersionNo_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueVersionNo(), "versionNo")
+}
 func (q *ProductCQ) SetVersionNo_NotEqual(value int64) *ProductCQ {
 	q.regVersionNo(df.CK_NE_C, value)
 	return q
@@ -838,3 +873,70 @@ func (q *ProductCQ) regVersionNo(key *df.ConditionKey, value interface{}) {
 	q.BaseConditionQuery.RegQ(key, value, q.VersionNo, "versionNo")
 }
 
+
+func (q *ProductCQ) QueryProductCategory() *ProductCategoryCQ {
+	if q.conditionQueryProductCategory == nil {
+		q.conditionQueryProductCategory = q.xcreateQueryProductCategory()
+		q.xsetupOuterJoinProductCategory()
+	}
+	return q.conditionQueryProductCategory
+}
+
+func (q *ProductCQ) xcreateQueryProductCategory() *ProductCategoryCQ {
+	nrp := q.BaseConditionQuery.ResolveNextRelationPath("Product", "ProductCategory")
+	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
+	var basecq df.ConditionQuery = q
+	cq := CreateProductCategoryCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
+	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
+	cq.BaseConditionQuery.ForeignPropertyName = "ProductCategory"
+	cq.BaseConditionQuery.RelationPath = nrp
+	return cq
+}
+func (q *ProductCQ) xsetupOuterJoinProductCategory() {
+	    cq := q.QueryProductCategory()
+        joinOnMap := make(map[string]string)
+        joinOnMap["productCategoryCode"]="productCategoryCode"
+        q.BaseConditionQuery.RegisterOuterJoin(
+        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "ProductCategory");
+}	
+	
+func (q *ProductCQ) QueryProductStatus() *ProductStatusCQ {
+	if q.conditionQueryProductStatus == nil {
+		q.conditionQueryProductStatus = q.xcreateQueryProductStatus()
+		q.xsetupOuterJoinProductStatus()
+	}
+	return q.conditionQueryProductStatus
+}
+
+func (q *ProductCQ) xcreateQueryProductStatus() *ProductStatusCQ {
+	nrp := q.BaseConditionQuery.ResolveNextRelationPath("Product", "ProductStatus")
+	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
+	var basecq df.ConditionQuery = q
+	cq := CreateProductStatusCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
+	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
+	cq.BaseConditionQuery.ForeignPropertyName = "ProductStatus"
+	cq.BaseConditionQuery.RelationPath = nrp
+	return cq
+}
+func (q *ProductCQ) xsetupOuterJoinProductStatus() {
+	    cq := q.QueryProductStatus()
+        joinOnMap := make(map[string]string)
+        joinOnMap["productStatusCode"]="productStatusCode"
+        q.BaseConditionQuery.RegisterOuterJoin(
+        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "ProductStatus");
+}	
+	
+func CreateProductCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *ProductCQ {
+	cq := new(ProductCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "Product"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

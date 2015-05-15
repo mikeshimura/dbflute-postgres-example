@@ -18,27 +18,31 @@ func (l *WhiteXlsManBhv) GetDBMeta() *df.DBMeta{
 func (l *WhiteXlsManBhv) GetBaseBehavior() *df.BaseBehavior {
 	return l.BaseBehavior
 }
-func (l *WhiteXlsManBhv) Update(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx) (int64, error) {
+func (l *WhiteXlsManBhv) Update(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteXlsMan
-	return l.BaseBehavior.DoUpdate(&entity, nil, tx)
+	return l.BaseBehavior.DoUpdate(&entity, nil, tx, ctx)
 }
-func (l *WhiteXlsManBhv) Insert(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx) (int64, error) {
+func (l *WhiteXlsManBhv) Insert(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteXlsMan
-	return l.BaseBehavior.DoInsert(&entity, nil, tx)
+	return l.BaseBehavior.DoInsert(&entity, nil, tx, ctx)
 }
-func (l *WhiteXlsManBhv) Delete(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx) (int64, error) {
+func (l *WhiteXlsManBhv) Delete(whiteXlsMan *entity.WhiteXlsMan, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteXlsMan
-	return l.BaseBehavior.DoDelete(&entity, nil, tx)
+	return l.BaseBehavior.DoDelete(&entity, nil, tx, ctx)
 }
 func (l *WhiteXlsManBhv) SelectList(cb *cb.WhiteXlsManCB, tx *sql.Tx) (*df.ListResultBean, error) {
 
 	return l.BaseBehavior.DoSelectList(cb, "WhiteXlsMan", tx)
 }
+func (l *WhiteXlsManBhv) SelectCount(cb *cb.WhiteXlsManCB, tx *sql.Tx) (int64, error) {
+
+	return l.BaseBehavior.DoSelectCount(cb, tx)
+}
 func (l *WhiteXlsManBhv) OutsideSql() *df.OutsideSqlBasicExecutor {
 	return l.BaseBehavior.DoOutsideSql()
 }
 
-func (l *WhiteXlsManBhv) ReadNextVal(tx *sql.Tx) (int64,error){
+func (l *WhiteXlsManBhv) ReadNextVal(tx *sql.Tx) int64{
 	return l.BaseBehavior.DoSelectNextVal(tx)
 }
 

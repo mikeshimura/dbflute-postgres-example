@@ -30,7 +30,10 @@ func (q *WhiteCompoundPkWrongOrderCQ) SetFirstId_Equal(value int64) *WhiteCompou
 	q.regFirstId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteCompoundPkWrongOrderCQ) SetFirstId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueFirstId(), "firstId")
+}
 func (q *WhiteCompoundPkWrongOrderCQ) SetFirstId_NotEqual(value int64) *WhiteCompoundPkWrongOrderCQ {
 	q.regFirstId(df.CK_NE_C, value)
 	return q
@@ -96,7 +99,10 @@ func (q *WhiteCompoundPkWrongOrderCQ) SetSecondId_Equal(value int64) *WhiteCompo
 	q.regSecondId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteCompoundPkWrongOrderCQ) SetSecondId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSecondId(), "secondId")
+}
 func (q *WhiteCompoundPkWrongOrderCQ) SetSecondId_NotEqual(value int64) *WhiteCompoundPkWrongOrderCQ {
 	q.regSecondId(df.CK_NE_C, value)
 	return q
@@ -162,7 +168,10 @@ func (q *WhiteCompoundPkWrongOrderCQ) SetThirdId_Equal(value int64) *WhiteCompou
 	q.regThirdId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteCompoundPkWrongOrderCQ) SetThirdId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueThirdId(), "thirdId")
+}
 func (q *WhiteCompoundPkWrongOrderCQ) SetThirdId_NotEqual(value int64) *WhiteCompoundPkWrongOrderCQ {
 	q.regThirdId(df.CK_NE_C, value)
 	return q
@@ -227,7 +236,10 @@ func (q *WhiteCompoundPkWrongOrderCQ) SetWrongName_Equal(value string) *WhiteCom
 	q.regWrongName(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *WhiteCompoundPkWrongOrderCQ) SetWrongName_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueWrongName(), "wrongName")
+}
 func (q *WhiteCompoundPkWrongOrderCQ) SetWrongName_NotEqual(value string) *WhiteCompoundPkWrongOrderCQ {
 	q.regWrongName(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -293,3 +305,18 @@ func (q *WhiteCompoundPkWrongOrderCQ) regWrongName(key *df.ConditionKey, value i
 	q.BaseConditionQuery.RegQ(key, value, q.WrongName, "wrongName")
 }
 
+
+func CreateWhiteCompoundPkWrongOrderCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteCompoundPkWrongOrderCQ {
+	cq := new(WhiteCompoundPkWrongOrderCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteCompoundPkWrongOrder"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

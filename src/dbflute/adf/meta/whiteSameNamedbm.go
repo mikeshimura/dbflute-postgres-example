@@ -15,6 +15,9 @@ type WhiteSameNameDbm_T struct {
 func (b *WhiteSameNameDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *WhiteSameNameDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *WhiteSameNameDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -35,22 +38,18 @@ func Create_WhiteSameNameDbm() {
 	whiteSameName = WhiteSameNameDbm
 	WhiteSameNameDbm.DBMeta=&whiteSameName
 	sameNameIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo same_name_id
 	sameNameIdSqlName.ColumnSqlName = "same_name_id"
 	sameNameIdSqlName.IrregularChar = false
 	WhiteSameNameDbm.ColumnSameNameId = df.CCI(&whiteSameName, "same_name_id", sameNameIdSqlName, "", "", "Long.class", "sameNameId", "", true, false,true, "int8", 19, 0, "",false,"","", "","whiteSameNameRefList","",false,"int64")
 	sameNameNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo same_name_name
 	sameNameNameSqlName.ColumnSqlName = "same_name_name"
 	sameNameNameSqlName.IrregularChar = false
-	WhiteSameNameDbm.ColumnSameNameName = df.CCI(&whiteSameName, "same_name_name", sameNameNameSqlName, "", "", "String.class", "sameNameName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"df.NullString")
+	WhiteSameNameDbm.ColumnSameNameName = df.CCI(&whiteSameName, "same_name_name", sameNameNameSqlName, "", "", "String.class", "sameNameName", "", false, false,false, "varchar", 200, 0, "",false,"","", "","","",false,"sql.NullString")
 	sameNameIntegerSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo same_name_integer
 	sameNameIntegerSqlName.ColumnSqlName = "same_name_integer"
 	sameNameIntegerSqlName.IrregularChar = false
 	WhiteSameNameDbm.ColumnSameNameInteger = df.CCI(&whiteSameName, "same_name_integer", sameNameIntegerSqlName, "", "", "Integer.class", "sameNameInteger", "", false, false,false, "int4", 10, 0, "",false,"","", "","","",false,"sql.NullInt64")
 	nextSchemaProductIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo next_schema_product_id
 	nextSchemaProductIdSqlName.ColumnSqlName = "next_schema_product_id"
 	nextSchemaProductIdSqlName.IrregularChar = false
 	WhiteSameNameDbm.ColumnNextSchemaProductId = df.CCI(&whiteSameName, "next_schema_product_id", nextSchemaProductIdSqlName, "", "", "Integer.class", "nextSchemaProductId", "", false, false,false, "int4", 10, 0, "",false,"","", "","","",false,"sql.NullInt64")

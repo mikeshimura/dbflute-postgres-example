@@ -69,7 +69,7 @@ public class WhiteSameNameDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnSameNameId = cci("same_name_id", "same_name_id", null, null, Long.class, "sameNameId", null, true, false, true, "int8", 19, 0, null, false, null, null, null, "whiteSameNameRefList", null, false);
 //"int64"
     protected final ColumnInfo _columnSameNameName = cci("same_name_name", "same_name_name", null, null, String.class, "sameNameName", null, false, false, false, "varchar", 200, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
     protected final ColumnInfo _columnSameNameInteger = cci("same_name_integer", "same_name_integer", null, null, Integer.class, "sameNameInteger", null, false, false, false, "int4", 10, 0, null, false, null, null, null, null, null, false);
 //"sql.NullInt64"
     protected final ColumnInfo _columnNextSchemaProductId = cci("next_schema_product_id", "next_schema_product_id", null, null, Integer.class, "nextSchemaProductId", null, false, false, false, "int4", 10, 0, null, false, null, null, null, null, null, false);

@@ -31,7 +31,10 @@ func (q *WhiteXlsManCQ) SetXlsManId_Equal(value int64) *WhiteXlsManCQ {
 	q.regXlsManId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteXlsManCQ) SetXlsManId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueXlsManId(), "xlsManId")
+}
 func (q *WhiteXlsManCQ) SetXlsManId_NotEqual(value int64) *WhiteXlsManCQ {
 	q.regXlsManId(df.CK_NE_C, value)
 	return q
@@ -96,7 +99,10 @@ func (q *WhiteXlsManCQ) SetStringConverted_Equal(value string) *WhiteXlsManCQ {
 	q.regStringConverted(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *WhiteXlsManCQ) SetStringConverted_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueStringConverted(), "stringConverted")
+}
 func (q *WhiteXlsManCQ) SetStringConverted_NotEqual(value string) *WhiteXlsManCQ {
 	q.regStringConverted(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -339,3 +345,18 @@ func (q *WhiteXlsManCQ) regTimestampZeroSuffixMillis(key *df.ConditionKey, value
 	q.BaseConditionQuery.RegQ(key, value, q.TimestampZeroSuffixMillis, "timestampZeroSuffixMillis")
 }
 
+
+func CreateWhiteXlsManCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteXlsManCQ {
+	cq := new(WhiteXlsManCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteXlsMan"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

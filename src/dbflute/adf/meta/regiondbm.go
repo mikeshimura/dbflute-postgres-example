@@ -13,6 +13,9 @@ type RegionDbm_T struct {
 func (b *RegionDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *RegionDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *RegionDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -33,12 +36,10 @@ func Create_RegionDbm() {
 	region = RegionDbm
 	RegionDbm.DBMeta=&region
 	regionIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo region_id
 	regionIdSqlName.ColumnSqlName = "region_id"
 	regionIdSqlName.IrregularChar = false
 	RegionDbm.ColumnRegionId = df.CCI(&region, "region_id", regionIdSqlName, "", "", "Integer.class", "regionId", "", true, false,true, "int4", 10, 0, "",false,"","", "","memberAddressList","",false,"int64")
 	regionNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo region_name
 	regionNameSqlName.ColumnSqlName = "region_name"
 	regionNameSqlName.IrregularChar = false
 	RegionDbm.ColumnRegionName = df.CCI(&region, "region_name", regionNameSqlName, "", "", "String.class", "regionName", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")

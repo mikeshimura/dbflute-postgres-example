@@ -8,7 +8,7 @@ import (
 
 type WhiteNotPkCB struct {
 	BaseConditionBean *df.BaseConditionBean
-	Query             *cq.WhiteNotPkCQ
+	query             *cq.WhiteNotPkCQ
 }
 
 func CreateWhiteNotPkCB() *WhiteNotPkCB {
@@ -18,31 +18,42 @@ func CreateWhiteNotPkCB() *WhiteNotPkCB {
 	cb.BaseConditionBean.TableDbName = "WhiteNotPk"
 	cb.BaseConditionBean.Name = "WhiteNotPkCB"
 	cb.BaseConditionBean.SqlClause = df.CreateSqlClause(cb, df.DBCurrent_I)
-	//dm:=DBMetaProvider_I.TableDbNameInstanceMap["WhiteNotPk"]
 	var dmx df.DBMeta = meta.WhiteNotPkDbm
 	(*cb.BaseConditionBean.SqlClause).SetDBMeta(&dmx)
 	(*cb.BaseConditionBean.SqlClause).SetUseSelectIndex(true)
-	cb.Query = cb.createConditionQuery(nil, cb.BaseConditionBean.SqlClause, (*cb.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
 	return cb
+}
+
+func (l *WhiteNotPkCB) Query() *cq.WhiteNotPkCQ {
+	if l.query == nil {
+		l.query = cq.CreateWhiteNotPkCQ(nil, l.BaseConditionBean.SqlClause, (*l.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
+		var cb df.ConditionBean = l
+		l.query.BaseConditionQuery.BaseCB = &cb	
+	}
+	return l.query
 }
 func (l *WhiteNotPkCB) GetBaseConditionBean() *df.BaseConditionBean {
 	return l.BaseConditionBean
 }
 
-func (l *WhiteNotPkCB) createConditionQuery(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *cq.WhiteNotPkCQ {
-	cq := new(cq.WhiteNotPkCQ)
-	cq.BaseConditionQuery = new(df.BaseConditionQuery)
-	cq.BaseConditionQuery.TableDbName = l.BaseConditionBean.TableDbName
-	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
-	cq.BaseConditionQuery.SqlClause = sqlClause
-	cq.BaseConditionQuery.AliasName = aliasName
-	cq.BaseConditionQuery.NestLevel = nestlevel
-	cq.BaseConditionQuery.DBMetaProvider = l.BaseConditionBean.DBMetaProvider
-	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
-	cq.BaseConditionQuery.ConditionQuery=cq
-	return cq
-}
-
 func (l *WhiteNotPkCB) AllowEmptyStringQuery() {
 	l.BaseConditionBean.AllowEmptyStringQuery()
+}
+
+
+func (l *WhiteNotPkCB) FetchFirst(fetchSize int){
+	(*l.GetBaseConditionBean().SqlClause).FetchFirst(fetchSize)
+}
+
+func (l *WhiteNotPkCB) OrScopeQuery(fquery func(*WhiteNotPkCB)){
+	(*l.BaseConditionBean.SqlClause).MakeOrScopeQueryEffective()
+	fquery(l)
+	(*l.BaseConditionBean.SqlClause).CloseOrScopeQuery()
+}
+
+type WhiteNotPkNss struct {
+	Query *cq.WhiteNotPkCQ
+}
+func (p *WhiteNotPkNss) hasConditionQuery() bool {
+	return p.Query != nil
 }

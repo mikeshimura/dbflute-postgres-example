@@ -29,7 +29,10 @@ func (q *WhiteNotPkCQ) SetNotPkId_Equal(value int64) *WhiteNotPkCQ {
 	q.regNotPkId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteNotPkCQ) SetNotPkId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueNotPkId(), "notPkId")
+}
 func (q *WhiteNotPkCQ) SetNotPkId_NotEqual(value int64) *WhiteNotPkCQ {
 	q.regNotPkId(df.CK_NE_C, value)
 	return q
@@ -86,7 +89,10 @@ func (q *WhiteNotPkCQ) SetNotPkName_Equal(value string) *WhiteNotPkCQ {
 	q.regNotPkName(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *WhiteNotPkCQ) SetNotPkName_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueNotPkName(), "notPkName")
+}
 func (q *WhiteNotPkCQ) SetNotPkName_NotEqual(value string) *WhiteNotPkCQ {
 	q.regNotPkName(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -165,7 +171,10 @@ func (q *WhiteNotPkCQ) SetNotPkInteger_Equal(value int64) *WhiteNotPkCQ {
 	q.regNotPkInteger(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteNotPkCQ) SetNotPkInteger_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueNotPkInteger(), "notPkInteger")
+}
 func (q *WhiteNotPkCQ) SetNotPkInteger_NotEqual(value int64) *WhiteNotPkCQ {
 	q.regNotPkInteger(df.CK_NE_C, value)
 	return q
@@ -218,3 +227,18 @@ func (q *WhiteNotPkCQ) regNotPkInteger(key *df.ConditionKey, value interface{}) 
 	q.BaseConditionQuery.RegQ(key, value, q.NotPkInteger, "notPkInteger")
 }
 
+
+func CreateWhiteNotPkCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteNotPkCQ {
+	cq := new(WhiteNotPkCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteNotPk"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

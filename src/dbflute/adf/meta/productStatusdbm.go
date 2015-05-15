@@ -14,6 +14,9 @@ type ProductStatusDbm_T struct {
 func (b *ProductStatusDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *ProductStatusDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *ProductStatusDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -34,17 +37,14 @@ func Create_ProductStatusDbm() {
 	productStatus = ProductStatusDbm
 	ProductStatusDbm.DBMeta=&productStatus
 	productStatusCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_status_code
 	productStatusCodeSqlName.ColumnSqlName = "product_status_code"
 	productStatusCodeSqlName.IrregularChar = false
 	ProductStatusDbm.ColumnProductStatusCode = df.CCI(&productStatus, "product_status_code", productStatusCodeSqlName, "", "", "String.class", "productStatusCode", "", true, false,true, "bpchar", 3, 0, "",false,"","", "","productList","",false,"string")
 	productStatusNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_status_name
 	productStatusNameSqlName.ColumnSqlName = "product_status_name"
 	productStatusNameSqlName.IrregularChar = false
 	ProductStatusDbm.ColumnProductStatusName = df.CCI(&productStatus, "product_status_name", productStatusNameSqlName, "", "", "String.class", "productStatusName", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")
 	displayOrderSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo display_order
 	displayOrderSqlName.ColumnSqlName = "display_order"
 	displayOrderSqlName.IrregularChar = false
 	ProductStatusDbm.ColumnDisplayOrder = df.CCI(&productStatus, "display_order", displayOrderSqlName, "", "", "Integer.class", "displayOrder", "", false, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")

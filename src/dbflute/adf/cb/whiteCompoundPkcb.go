@@ -8,7 +8,7 @@ import (
 
 type WhiteCompoundPkCB struct {
 	BaseConditionBean *df.BaseConditionBean
-	Query             *cq.WhiteCompoundPkCQ
+	query             *cq.WhiteCompoundPkCQ
 }
 
 func CreateWhiteCompoundPkCB() *WhiteCompoundPkCB {
@@ -18,31 +18,42 @@ func CreateWhiteCompoundPkCB() *WhiteCompoundPkCB {
 	cb.BaseConditionBean.TableDbName = "WhiteCompoundPk"
 	cb.BaseConditionBean.Name = "WhiteCompoundPkCB"
 	cb.BaseConditionBean.SqlClause = df.CreateSqlClause(cb, df.DBCurrent_I)
-	//dm:=DBMetaProvider_I.TableDbNameInstanceMap["WhiteCompoundPk"]
 	var dmx df.DBMeta = meta.WhiteCompoundPkDbm
 	(*cb.BaseConditionBean.SqlClause).SetDBMeta(&dmx)
 	(*cb.BaseConditionBean.SqlClause).SetUseSelectIndex(true)
-	cb.Query = cb.createConditionQuery(nil, cb.BaseConditionBean.SqlClause, (*cb.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
 	return cb
+}
+
+func (l *WhiteCompoundPkCB) Query() *cq.WhiteCompoundPkCQ {
+	if l.query == nil {
+		l.query = cq.CreateWhiteCompoundPkCQ(nil, l.BaseConditionBean.SqlClause, (*l.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
+		var cb df.ConditionBean = l
+		l.query.BaseConditionQuery.BaseCB = &cb	
+	}
+	return l.query
 }
 func (l *WhiteCompoundPkCB) GetBaseConditionBean() *df.BaseConditionBean {
 	return l.BaseConditionBean
 }
 
-func (l *WhiteCompoundPkCB) createConditionQuery(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *cq.WhiteCompoundPkCQ {
-	cq := new(cq.WhiteCompoundPkCQ)
-	cq.BaseConditionQuery = new(df.BaseConditionQuery)
-	cq.BaseConditionQuery.TableDbName = l.BaseConditionBean.TableDbName
-	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
-	cq.BaseConditionQuery.SqlClause = sqlClause
-	cq.BaseConditionQuery.AliasName = aliasName
-	cq.BaseConditionQuery.NestLevel = nestlevel
-	cq.BaseConditionQuery.DBMetaProvider = l.BaseConditionBean.DBMetaProvider
-	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
-	cq.BaseConditionQuery.ConditionQuery=cq
-	return cq
-}
-
 func (l *WhiteCompoundPkCB) AllowEmptyStringQuery() {
 	l.BaseConditionBean.AllowEmptyStringQuery()
+}
+
+
+func (l *WhiteCompoundPkCB) FetchFirst(fetchSize int){
+	(*l.GetBaseConditionBean().SqlClause).FetchFirst(fetchSize)
+}
+
+func (l *WhiteCompoundPkCB) OrScopeQuery(fquery func(*WhiteCompoundPkCB)){
+	(*l.BaseConditionBean.SqlClause).MakeOrScopeQueryEffective()
+	fquery(l)
+	(*l.BaseConditionBean.SqlClause).CloseOrScopeQuery()
+}
+
+type WhiteCompoundPkNss struct {
+	Query *cq.WhiteCompoundPkCQ
+}
+func (p *WhiteCompoundPkNss) hasConditionQuery() bool {
+	return p.Query != nil
 }

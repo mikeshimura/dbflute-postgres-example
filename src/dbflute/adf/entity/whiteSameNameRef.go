@@ -9,6 +9,8 @@ type WhiteSameNameRef struct {
 	sameNameId int64
 	nextSameNameId int64
 	df.BaseEntity
+WhiteSameName_R  *WhiteSameName
+
 }
 
 func CreateWhiteSameNameRef() *WhiteSameNameRef{
@@ -58,7 +60,12 @@ func (t *WhiteSameNameRef) SetNextSameNameId(nextSameNameId int64) {
 	t.AddPropertyName("nextSameNameId")
 	t.nextSameNameId = nextSameNameId
 }
-
+func (t *WhiteSameNameRef) GetWhiteSameName_R() *WhiteSameName{
+	return t.WhiteSameName_R
+}
+func (t *WhiteSameNameRef) SetWhiteSameName_R(value *WhiteSameName) {
+    t.WhiteSameName_R = value
+}
 func (t *WhiteSameNameRef) SetUp(){
 	
 }

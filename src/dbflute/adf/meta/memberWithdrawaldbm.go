@@ -21,6 +21,31 @@ type MemberWithdrawalDbm_T struct {
 func (b *MemberWithdrawalDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *MemberWithdrawalDbm_T) foreignMember() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		MemberWithdrawalDbm.GetColumnInfoByPropertyName("memberId"),
+		MemberDbm.GetColumnInfoByPropertyName("memberId"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_member_withdrawal_info_member", "Member",
+		columns, 0, true, false, false, false,
+		"", nil, false, "memberWithdrawalAsOne")
+}	
+func (b *MemberWithdrawalDbm_T) foreignWithdrawalReason() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		MemberWithdrawalDbm.GetColumnInfoByPropertyName("withdrawalReasonCode"),
+		WithdrawalReasonDbm.GetColumnInfoByPropertyName("withdrawalReasonCode"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_member_withdrawal_info_withdrawal_reason", "WithdrawalReason",
+		columns, 1, false, false, false, false,
+		"", nil, false, "memberWithdrawalList")
+}	
+func (b *MemberWithdrawalDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["Member"] = b.foreignMember()
+	b.ForeignInfoMap["WithdrawalReason"] = b.foreignWithdrawalReason()
+}
 
 func (b *MemberWithdrawalDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -41,52 +66,42 @@ func Create_MemberWithdrawalDbm() {
 	memberWithdrawal = MemberWithdrawalDbm
 	MemberWithdrawalDbm.DBMeta=&memberWithdrawal
 	memberIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_id
 	memberIdSqlName.ColumnSqlName = "member_id"
 	memberIdSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnMemberId = df.CCI(&memberWithdrawal, "member_id", memberIdSqlName, "", "", "Integer.class", "memberId", "", true, false,true, "int4", 10, 0, "",false,"","", "member","","",false,"int64")
 	withdrawalReasonCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo withdrawal_reason_code
 	withdrawalReasonCodeSqlName.ColumnSqlName = "withdrawal_reason_code"
 	withdrawalReasonCodeSqlName.IrregularChar = false
-	MemberWithdrawalDbm.ColumnWithdrawalReasonCode = df.CCI(&memberWithdrawal, "withdrawal_reason_code", withdrawalReasonCodeSqlName, "", "", "String.class", "withdrawalReasonCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "withdrawalReason","","",false,"df.NullString")
+	MemberWithdrawalDbm.ColumnWithdrawalReasonCode = df.CCI(&memberWithdrawal, "withdrawal_reason_code", withdrawalReasonCodeSqlName, "", "", "String.class", "withdrawalReasonCode", "", false, false,false, "bpchar", 3, 0, "",false,"","", "withdrawalReason","","",false,"sql.NullString")
 	withdrawalReasonInputTextSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo withdrawal_reason_input_text
 	withdrawalReasonInputTextSqlName.ColumnSqlName = "withdrawal_reason_input_text"
 	withdrawalReasonInputTextSqlName.IrregularChar = false
-	MemberWithdrawalDbm.ColumnWithdrawalReasonInputText = df.CCI(&memberWithdrawal, "withdrawal_reason_input_text", withdrawalReasonInputTextSqlName, "", "", "String.class", "withdrawalReasonInputText", "", false, false,false, "text", 2147483647, 0, "",false,"","", "","","",false,"df.NullString")
+	MemberWithdrawalDbm.ColumnWithdrawalReasonInputText = df.CCI(&memberWithdrawal, "withdrawal_reason_input_text", withdrawalReasonInputTextSqlName, "", "", "String.class", "withdrawalReasonInputText", "", false, false,false, "text", 2147483647, 0, "",false,"","", "","","",false,"sql.NullString")
 	withdrawalDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo withdrawal_datetime
 	withdrawalDatetimeSqlName.ColumnSqlName = "withdrawal_datetime"
 	withdrawalDatetimeSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnWithdrawalDatetime = df.CCI(&memberWithdrawal, "withdrawal_datetime", withdrawalDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "withdrawalDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	registerDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_datetime
 	registerDatetimeSqlName.ColumnSqlName = "register_datetime"
 	registerDatetimeSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnRegisterDatetime = df.CCI(&memberWithdrawal, "register_datetime", registerDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "registerDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	registerProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_process
 	registerProcessSqlName.ColumnSqlName = "register_process"
 	registerProcessSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnRegisterProcess = df.CCI(&memberWithdrawal, "register_process", registerProcessSqlName, "", "", "String.class", "registerProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	registerUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_user
 	registerUserSqlName.ColumnSqlName = "register_user"
 	registerUserSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnRegisterUser = df.CCI(&memberWithdrawal, "register_user", registerUserSqlName, "", "", "String.class", "registerUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_datetime
 	updateDatetimeSqlName.ColumnSqlName = "update_datetime"
 	updateDatetimeSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnUpdateDatetime = df.CCI(&memberWithdrawal, "update_datetime", updateDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "updateDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	updateProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_process
 	updateProcessSqlName.ColumnSqlName = "update_process"
 	updateProcessSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnUpdateProcess = df.CCI(&memberWithdrawal, "update_process", updateProcessSqlName, "", "", "String.class", "updateProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_user
 	updateUserSqlName.ColumnSqlName = "update_user"
 	updateUserSqlName.IrregularChar = false
 	MemberWithdrawalDbm.ColumnUpdateUser = df.CCI(&memberWithdrawal, "update_user", updateUserSqlName, "", "", "String.class", "updateUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")

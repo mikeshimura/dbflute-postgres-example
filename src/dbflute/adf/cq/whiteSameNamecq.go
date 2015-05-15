@@ -30,7 +30,10 @@ func (q *WhiteSameNameCQ) SetSameNameId_Equal(value int64) *WhiteSameNameCQ {
 	q.regSameNameId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameCQ) SetSameNameId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSameNameId(), "sameNameId")
+}
 func (q *WhiteSameNameCQ) SetSameNameId_NotEqual(value int64) *WhiteSameNameCQ {
 	q.regSameNameId(df.CK_NE_C, value)
 	return q
@@ -95,7 +98,10 @@ func (q *WhiteSameNameCQ) SetSameNameName_Equal(value string) *WhiteSameNameCQ {
 	q.regSameNameName(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *WhiteSameNameCQ) SetSameNameName_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSameNameName(), "sameNameName")
+}
 func (q *WhiteSameNameCQ) SetSameNameName_NotEqual(value string) *WhiteSameNameCQ {
 	q.regSameNameName(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -174,7 +180,10 @@ func (q *WhiteSameNameCQ) SetSameNameInteger_Equal(value int64) *WhiteSameNameCQ
 	q.regSameNameInteger(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameCQ) SetSameNameInteger_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSameNameInteger(), "sameNameInteger")
+}
 func (q *WhiteSameNameCQ) SetSameNameInteger_NotEqual(value int64) *WhiteSameNameCQ {
 	q.regSameNameInteger(df.CK_NE_C, value)
 	return q
@@ -240,7 +249,10 @@ func (q *WhiteSameNameCQ) SetNextSchemaProductId_Equal(value int64) *WhiteSameNa
 	q.regNextSchemaProductId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameCQ) SetNextSchemaProductId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueNextSchemaProductId(), "nextSchemaProductId")
+}
 func (q *WhiteSameNameCQ) SetNextSchemaProductId_NotEqual(value int64) *WhiteSameNameCQ {
 	q.regNextSchemaProductId(df.CK_NE_C, value)
 	return q
@@ -293,3 +305,18 @@ func (q *WhiteSameNameCQ) regNextSchemaProductId(key *df.ConditionKey, value int
 	q.BaseConditionQuery.RegQ(key, value, q.NextSchemaProductId, "nextSchemaProductId")
 }
 
+
+func CreateWhiteSameNameCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteSameNameCQ {
+	cq := new(WhiteSameNameCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteSameName"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

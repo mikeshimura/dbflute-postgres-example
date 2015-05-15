@@ -24,6 +24,20 @@ type MemberDbm_T struct {
 func (b *MemberDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *MemberDbm_T) foreignMemberStatus() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		MemberDbm.GetColumnInfoByPropertyName("memberStatusCode"),
+		MemberStatusDbm.GetColumnInfoByPropertyName("memberStatusCode"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_member_member_status", "MemberStatus",
+		columns, 0, false, false, false, false,
+		"", nil, false, "memberList")
+}	
+func (b *MemberDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["MemberStatus"] = b.foreignMemberStatus()
+}
 
 func (b *MemberDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -44,67 +58,54 @@ func Create_MemberDbm() {
 	member = MemberDbm
 	MemberDbm.DBMeta=&member
 	memberIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_id
 	memberIdSqlName.ColumnSqlName = "member_id"
 	memberIdSqlName.IrregularChar = false
 	MemberDbm.ColumnMemberId = df.CCI(&member, "member_id", memberIdSqlName, "", "", "Integer.class", "memberId", "", true, true,true, "serial", 10, 0, "nextval('member_member_id_seq'::regclass)",false,"","", "","memberAddressList,memberLoginList,purchaseList","",false,"int64")
 	memberNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_name
 	memberNameSqlName.ColumnSqlName = "member_name"
 	memberNameSqlName.IrregularChar = false
 	MemberDbm.ColumnMemberName = df.CCI(&member, "member_name", memberNameSqlName, "", "", "String.class", "memberName", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	memberAccountSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_account
 	memberAccountSqlName.ColumnSqlName = "member_account"
 	memberAccountSqlName.IrregularChar = false
 	MemberDbm.ColumnMemberAccount = df.CCI(&member, "member_account", memberAccountSqlName, "", "", "String.class", "memberAccount", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")
 	memberStatusCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_status_code
 	memberStatusCodeSqlName.ColumnSqlName = "member_status_code"
 	memberStatusCodeSqlName.IrregularChar = false
 	MemberDbm.ColumnMemberStatusCode = df.CCI(&member, "member_status_code", memberStatusCodeSqlName, "", "", "String.class", "memberStatusCode", "", false, false,true, "bpchar", 3, 0, "",false,"","", "memberStatus","","",false,"string")
 	formalizedDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo formalized_datetime
 	formalizedDatetimeSqlName.ColumnSqlName = "formalized_datetime"
 	formalizedDatetimeSqlName.IrregularChar = false
 	MemberDbm.ColumnFormalizedDatetime = df.CCI(&member, "formalized_datetime", formalizedDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "formalizedDatetime", "", false, false,false, "timestamp", 26, 3, "",false,"","", "","","",false,"df.NullTimestamp")
 	birthdateSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo birthdate
 	birthdateSqlName.ColumnSqlName = "birthdate"
 	birthdateSqlName.IrregularChar = false
 	MemberDbm.ColumnBirthdate = df.CCI(&member, "birthdate", birthdateSqlName, "", "", "java.time.LocalDate.class", "birthdate", "", false, false,false, "date", 13, 0, "",false,"","", "","","",false,"df.NullDate")
 	registerDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_datetime
 	registerDatetimeSqlName.ColumnSqlName = "register_datetime"
 	registerDatetimeSqlName.IrregularChar = false
 	MemberDbm.ColumnRegisterDatetime = df.CCI(&member, "register_datetime", registerDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "registerDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	registerUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_user
 	registerUserSqlName.ColumnSqlName = "register_user"
 	registerUserSqlName.IrregularChar = false
 	MemberDbm.ColumnRegisterUser = df.CCI(&member, "register_user", registerUserSqlName, "", "", "String.class", "registerUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	registerProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_process
 	registerProcessSqlName.ColumnSqlName = "register_process"
 	registerProcessSqlName.IrregularChar = false
 	MemberDbm.ColumnRegisterProcess = df.CCI(&member, "register_process", registerProcessSqlName, "", "", "String.class", "registerProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_datetime
 	updateDatetimeSqlName.ColumnSqlName = "update_datetime"
 	updateDatetimeSqlName.IrregularChar = false
 	MemberDbm.ColumnUpdateDatetime = df.CCI(&member, "update_datetime", updateDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "updateDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	updateUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_user
 	updateUserSqlName.ColumnSqlName = "update_user"
 	updateUserSqlName.IrregularChar = false
 	MemberDbm.ColumnUpdateUser = df.CCI(&member, "update_user", updateUserSqlName, "", "", "String.class", "updateUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_process
 	updateProcessSqlName.ColumnSqlName = "update_process"
 	updateProcessSqlName.IrregularChar = false
 	MemberDbm.ColumnUpdateProcess = df.CCI(&member, "update_process", updateProcessSqlName, "", "", "String.class", "updateProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	versionNoSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo version_no
 	versionNoSqlName.ColumnSqlName = "version_no"
 	versionNoSqlName.IrregularChar = false
 	MemberDbm.ColumnVersionNo = df.CCI(&member, "version_no", versionNoSqlName, "", "", "Long.class", "versionNo", "", false, false,true, "int8", 19, 0, "",false,"OptimisticLockType.VERSION_NO","", "","","",false,"int64")

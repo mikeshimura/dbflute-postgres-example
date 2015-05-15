@@ -20,6 +20,20 @@ type PurchasePaymentDbm_T struct {
 func (b *PurchasePaymentDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *PurchasePaymentDbm_T) foreignPurchase() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		PurchasePaymentDbm.GetColumnInfoByPropertyName("purchaseId"),
+		PurchaseDbm.GetColumnInfoByPropertyName("purchaseId"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_purchase_payment_purchase", "Purchase",
+		columns, 0, false, false, false, false,
+		"", nil, false, "purchasePaymentList")
+}	
+func (b *PurchasePaymentDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["Purchase"] = b.foreignPurchase()
+}
 
 func (b *PurchasePaymentDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -40,47 +54,38 @@ func Create_PurchasePaymentDbm() {
 	purchasePayment = PurchasePaymentDbm
 	PurchasePaymentDbm.DBMeta=&purchasePayment
 	purchasePaymentIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo purchase_payment_id
 	purchasePaymentIdSqlName.ColumnSqlName = "purchase_payment_id"
 	purchasePaymentIdSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnPurchasePaymentId = df.CCI(&purchasePayment, "purchase_payment_id", purchasePaymentIdSqlName, "", "", "Long.class", "purchasePaymentId", "", true, true,true, "bigserial", 19, 0, "nextval('purchase_payment_purchase_payment_id_seq'::regclass)",false,"","", "","","",false,"int64")
 	purchaseIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo purchase_id
 	purchaseIdSqlName.ColumnSqlName = "purchase_id"
 	purchaseIdSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnPurchaseId = df.CCI(&purchasePayment, "purchase_id", purchaseIdSqlName, "", "", "Long.class", "purchaseId", "", false, false,true, "int8", 19, 0, "",false,"","", "purchase","","",false,"int64")
 	paymentAmountSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo payment_amount
 	paymentAmountSqlName.ColumnSqlName = "payment_amount"
 	paymentAmountSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnPaymentAmount = df.CCI(&purchasePayment, "payment_amount", paymentAmountSqlName, "", "", "java.math.BigDecimal.class", "paymentAmount", "", false, false,true, "numeric", 10, 2, "",false,"","", "","","",false,"df.Numeric")
 	paymentDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo payment_datetime
 	paymentDatetimeSqlName.ColumnSqlName = "payment_datetime"
 	paymentDatetimeSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnPaymentDatetime = df.CCI(&purchasePayment, "payment_datetime", paymentDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "paymentDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	paymentMethodCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo payment_method_code
 	paymentMethodCodeSqlName.ColumnSqlName = "payment_method_code"
 	paymentMethodCodeSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnPaymentMethodCode = df.CCI(&purchasePayment, "payment_method_code", paymentMethodCodeSqlName, "", "", "String.class", "paymentMethodCode", "", false, false,true, "bpchar", 3, 0, "",false,"","", "","","",false,"string")
 	registerDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_datetime
 	registerDatetimeSqlName.ColumnSqlName = "register_datetime"
 	registerDatetimeSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnRegisterDatetime = df.CCI(&purchasePayment, "register_datetime", registerDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "registerDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	registerUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_user
 	registerUserSqlName.ColumnSqlName = "register_user"
 	registerUserSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnRegisterUser = df.CCI(&purchasePayment, "register_user", registerUserSqlName, "", "", "String.class", "registerUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_datetime
 	updateDatetimeSqlName.ColumnSqlName = "update_datetime"
 	updateDatetimeSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnUpdateDatetime = df.CCI(&purchasePayment, "update_datetime", updateDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "updateDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	updateUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_user
 	updateUserSqlName.ColumnSqlName = "update_user"
 	updateUserSqlName.IrregularChar = false
 	PurchasePaymentDbm.ColumnUpdateUser = df.CCI(&purchasePayment, "update_user", updateUserSqlName, "", "", "String.class", "updateUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")

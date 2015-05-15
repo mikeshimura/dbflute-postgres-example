@@ -9,6 +9,7 @@ type WhiteSameNameRefCQ struct {
 	SameNameRefId *df.ConditionValue
 	SameNameId *df.ConditionValue
 	NextSameNameId *df.ConditionValue
+    conditionQueryWhiteSameName *WhiteSameNameCQ
 }
 
 func (q *WhiteSameNameRefCQ) GetBaseConditionQuery() *df.BaseConditionQuery{
@@ -29,7 +30,10 @@ func (q *WhiteSameNameRefCQ) SetSameNameRefId_Equal(value int64) *WhiteSameNameR
 	q.regSameNameRefId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameRefCQ) SetSameNameRefId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSameNameRefId(), "sameNameRefId")
+}
 func (q *WhiteSameNameRefCQ) SetSameNameRefId_NotEqual(value int64) *WhiteSameNameRefCQ {
 	q.regSameNameRefId(df.CK_NE_C, value)
 	return q
@@ -95,7 +99,10 @@ func (q *WhiteSameNameRefCQ) SetSameNameId_Equal(value int64) *WhiteSameNameRefC
 	q.regSameNameId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameRefCQ) SetSameNameId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueSameNameId(), "sameNameId")
+}
 func (q *WhiteSameNameRefCQ) SetSameNameId_NotEqual(value int64) *WhiteSameNameRefCQ {
 	q.regSameNameId(df.CK_NE_C, value)
 	return q
@@ -153,7 +160,10 @@ func (q *WhiteSameNameRefCQ) SetNextSameNameId_Equal(value int64) *WhiteSameName
 	q.regNextSameNameId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *WhiteSameNameRefCQ) SetNextSameNameId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueNextSameNameId(), "nextSameNameId")
+}
 func (q *WhiteSameNameRefCQ) SetNextSameNameId_NotEqual(value int64) *WhiteSameNameRefCQ {
 	q.regNextSameNameId(df.CK_NE_C, value)
 	return q
@@ -198,3 +208,44 @@ func (q *WhiteSameNameRefCQ) regNextSameNameId(key *df.ConditionKey, value inter
 	q.BaseConditionQuery.RegQ(key, value, q.NextSameNameId, "nextSameNameId")
 }
 
+
+func (q *WhiteSameNameRefCQ) QueryWhiteSameName() *WhiteSameNameCQ {
+	if q.conditionQueryWhiteSameName == nil {
+		q.conditionQueryWhiteSameName = q.xcreateQueryWhiteSameName()
+		q.xsetupOuterJoinWhiteSameName()
+	}
+	return q.conditionQueryWhiteSameName
+}
+
+func (q *WhiteSameNameRefCQ) xcreateQueryWhiteSameName() *WhiteSameNameCQ {
+	nrp := q.BaseConditionQuery.ResolveNextRelationPath("WhiteSameNameRef", "WhiteSameName")
+	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
+	var basecq df.ConditionQuery = q
+	cq := CreateWhiteSameNameCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
+	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
+	cq.BaseConditionQuery.ForeignPropertyName = "WhiteSameName"
+	cq.BaseConditionQuery.RelationPath = nrp
+	return cq
+}
+func (q *WhiteSameNameRefCQ) xsetupOuterJoinWhiteSameName() {
+	    cq := q.QueryWhiteSameName()
+        joinOnMap := make(map[string]string)
+        joinOnMap["sameNameId"]="sameNameId"
+        q.BaseConditionQuery.RegisterOuterJoin(
+        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "WhiteSameName");
+}	
+	
+func CreateWhiteSameNameRefCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *WhiteSameNameRefCQ {
+	cq := new(WhiteSameNameRefCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "WhiteSameNameRef"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	

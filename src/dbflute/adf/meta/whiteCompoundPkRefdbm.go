@@ -15,6 +15,22 @@ type WhiteCompoundPkRefDbm_T struct {
 func (b *WhiteCompoundPkRefDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *WhiteCompoundPkRefDbm_T) foreignWhiteCompoundPk() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		WhiteCompoundPkRefDbm.GetColumnInfoByPropertyName("refFirstId"),
+		WhiteCompoundPkDbm.GetColumnInfoByPropertyName("pkFirstId"),
+		WhiteCompoundPkRefDbm.GetColumnInfoByPropertyName("refSecondId"),
+		WhiteCompoundPkDbm.GetColumnInfoByPropertyName("pkSecondId"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_white_compound_pk_ref", "WhiteCompoundPk",
+		columns, 0, false, false, false, false,
+		"", nil, false, "whiteCompoundPkRefList")
+}	
+func (b *WhiteCompoundPkRefDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["WhiteCompoundPk"] = b.foreignWhiteCompoundPk()
+}
 
 func (b *WhiteCompoundPkRefDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -35,22 +51,18 @@ func Create_WhiteCompoundPkRefDbm() {
 	whiteCompoundPkRef = WhiteCompoundPkRefDbm
 	WhiteCompoundPkRefDbm.DBMeta=&whiteCompoundPkRef
 	multipleFirstIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo multiple_first_id
 	multipleFirstIdSqlName.ColumnSqlName = "multiple_first_id"
 	multipleFirstIdSqlName.IrregularChar = false
 	WhiteCompoundPkRefDbm.ColumnMultipleFirstId = df.CCI(&whiteCompoundPkRef, "multiple_first_id", multipleFirstIdSqlName, "", "", "Integer.class", "multipleFirstId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	multipleSecondIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo multiple_second_id
 	multipleSecondIdSqlName.ColumnSqlName = "multiple_second_id"
 	multipleSecondIdSqlName.IrregularChar = false
 	WhiteCompoundPkRefDbm.ColumnMultipleSecondId = df.CCI(&whiteCompoundPkRef, "multiple_second_id", multipleSecondIdSqlName, "", "", "Integer.class", "multipleSecondId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	refFirstIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo ref_first_id
 	refFirstIdSqlName.ColumnSqlName = "ref_first_id"
 	refFirstIdSqlName.IrregularChar = false
 	WhiteCompoundPkRefDbm.ColumnRefFirstId = df.CCI(&whiteCompoundPkRef, "ref_first_id", refFirstIdSqlName, "", "", "Integer.class", "refFirstId", "", false, false,true, "int4", 10, 0, "",false,"","", "whiteCompoundPk","","",false,"int64")
 	refSecondIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo ref_second_id
 	refSecondIdSqlName.ColumnSqlName = "ref_second_id"
 	refSecondIdSqlName.IrregularChar = false
 	WhiteCompoundPkRefDbm.ColumnRefSecondId = df.CCI(&whiteCompoundPkRef, "ref_second_id", refSecondIdSqlName, "", "", "Integer.class", "refSecondId", "", false, false,true, "int4", 10, 0, "",false,"","", "whiteCompoundPk","","",false,"int64")

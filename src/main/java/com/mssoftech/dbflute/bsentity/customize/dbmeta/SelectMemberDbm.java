@@ -73,19 +73,19 @@ public class SelectMemberDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnMemberId = cci("member_id", "member_id", null, null, Integer.class, "memberId", null, false, false, false, "serial", 10, 0, null, false, null, null, null, null, null, false);
 //"sql.NullInt64"
     protected final ColumnInfo _columnMemberName = cci("member_name", "member_name", null, null, String.class, "memberName", null, false, false, false, "varchar", 200, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
     protected final ColumnInfo _columnMemberAccount = cci("member_account", "member_account", null, null, String.class, "memberAccount", null, false, false, false, "varchar", 50, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
     protected final ColumnInfo _columnBirthdate = cci("birthdate", "birthdate", null, null, java.time.LocalDate.class, "birthdate", null, false, false, false, "date", 13, 0, null, false, null, null, null, null, null, false);
 //"df.NullDate"
     protected final ColumnInfo _columnFormalizedDatetime = cci("formalized_datetime", "formalized_datetime", null, null, java.time.LocalDateTime.class, "formalizedDatetime", null, false, false, false, "timestamp", 26, 3, null, false, null, null, null, null, null, false);
 //"df.NullTimestamp"
     protected final ColumnInfo _columnMemberStatusCode = cci("member_status_code", "member_status_code", null, null, String.class, "memberStatusCode", null, false, false, false, "bpchar", 3, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
     protected final ColumnInfo _columnMemberStatusName = cci("member_status_name", "member_status_name", null, null, String.class, "memberStatusName", null, false, false, false, "varchar", 50, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
     protected final ColumnInfo _columnDescription = cci("description", "description", null, null, String.class, "description", null, false, false, false, "varchar", 200, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
 
     /**
      * member_id: {serial(10), refers to member.member_id}

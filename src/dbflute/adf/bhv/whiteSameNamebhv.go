@@ -18,27 +18,31 @@ func (l *WhiteSameNameBhv) GetDBMeta() *df.DBMeta{
 func (l *WhiteSameNameBhv) GetBaseBehavior() *df.BaseBehavior {
 	return l.BaseBehavior
 }
-func (l *WhiteSameNameBhv) Update(whiteSameName *entity.WhiteSameName, tx *sql.Tx) (int64, error) {
+func (l *WhiteSameNameBhv) Update(whiteSameName *entity.WhiteSameName, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteSameName
-	return l.BaseBehavior.DoUpdate(&entity, nil, tx)
+	return l.BaseBehavior.DoUpdate(&entity, nil, tx, ctx)
 }
-func (l *WhiteSameNameBhv) Insert(whiteSameName *entity.WhiteSameName, tx *sql.Tx) (int64, error) {
+func (l *WhiteSameNameBhv) Insert(whiteSameName *entity.WhiteSameName, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteSameName
-	return l.BaseBehavior.DoInsert(&entity, nil, tx)
+	return l.BaseBehavior.DoInsert(&entity, nil, tx, ctx)
 }
-func (l *WhiteSameNameBhv) Delete(whiteSameName *entity.WhiteSameName, tx *sql.Tx) (int64, error) {
+func (l *WhiteSameNameBhv) Delete(whiteSameName *entity.WhiteSameName, tx *sql.Tx, ctx *df.Context) (int64, error) {
 	var entity df.Entity = whiteSameName
-	return l.BaseBehavior.DoDelete(&entity, nil, tx)
+	return l.BaseBehavior.DoDelete(&entity, nil, tx, ctx)
 }
 func (l *WhiteSameNameBhv) SelectList(cb *cb.WhiteSameNameCB, tx *sql.Tx) (*df.ListResultBean, error) {
 
 	return l.BaseBehavior.DoSelectList(cb, "WhiteSameName", tx)
 }
+func (l *WhiteSameNameBhv) SelectCount(cb *cb.WhiteSameNameCB, tx *sql.Tx) (int64, error) {
+
+	return l.BaseBehavior.DoSelectCount(cb, tx)
+}
 func (l *WhiteSameNameBhv) OutsideSql() *df.OutsideSqlBasicExecutor {
 	return l.BaseBehavior.DoOutsideSql()
 }
 
-func (l *WhiteSameNameBhv) ReadNextVal(tx *sql.Tx) (int64,error){
+func (l *WhiteSameNameBhv) ReadNextVal(tx *sql.Tx) int64{
 	return l.BaseBehavior.DoSelectNextVal(tx)
 }
 

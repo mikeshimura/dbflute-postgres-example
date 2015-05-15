@@ -15,6 +15,9 @@ type MemberStatusDbm_T struct {
 func (b *MemberStatusDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *MemberStatusDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *MemberStatusDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -35,22 +38,18 @@ func Create_MemberStatusDbm() {
 	memberStatus = MemberStatusDbm
 	MemberStatusDbm.DBMeta=&memberStatus
 	memberStatusCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_status_code
 	memberStatusCodeSqlName.ColumnSqlName = "member_status_code"
 	memberStatusCodeSqlName.IrregularChar = false
 	MemberStatusDbm.ColumnMemberStatusCode = df.CCI(&memberStatus, "member_status_code", memberStatusCodeSqlName, "", "", "String.class", "memberStatusCode", "", true, false,true, "bpchar", 3, 0, "",false,"","", "","memberList,memberLoginList","",false,"string")
 	memberStatusNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo member_status_name
 	memberStatusNameSqlName.ColumnSqlName = "member_status_name"
 	memberStatusNameSqlName.IrregularChar = false
 	MemberStatusDbm.ColumnMemberStatusName = df.CCI(&memberStatus, "member_status_name", memberStatusNameSqlName, "", "", "String.class", "memberStatusName", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")
 	descriptionSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo description
 	descriptionSqlName.ColumnSqlName = "description"
 	descriptionSqlName.IrregularChar = false
 	MemberStatusDbm.ColumnDescription = df.CCI(&memberStatus, "description", descriptionSqlName, "", "", "String.class", "description", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	displayOrderSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo display_order
 	displayOrderSqlName.ColumnSqlName = "display_order"
 	displayOrderSqlName.IrregularChar = false
 	MemberStatusDbm.ColumnDisplayOrder = df.CCI(&memberStatus, "display_order", displayOrderSqlName, "", "", "Integer.class", "displayOrder", "", false, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")

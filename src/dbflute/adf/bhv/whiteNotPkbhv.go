@@ -21,11 +21,15 @@ func (l *WhiteNotPkBhv) SelectList(cb *cb.WhiteNotPkCB, tx *sql.Tx) (*df.ListRes
 
 	return l.BaseBehavior.DoSelectList(cb, "WhiteNotPk", tx)
 }
+func (l *WhiteNotPkBhv) SelectCount(cb *cb.WhiteNotPkCB, tx *sql.Tx) (int64, error) {
+
+	return l.BaseBehavior.DoSelectCount(cb, tx)
+}
 func (l *WhiteNotPkBhv) OutsideSql() *df.OutsideSqlBasicExecutor {
 	return l.BaseBehavior.DoOutsideSql()
 }
 
-func (l *WhiteNotPkBhv) ReadNextVal(tx *sql.Tx) (int64,error){
+func (l *WhiteNotPkBhv) ReadNextVal(tx *sql.Tx) int64{
 	return l.BaseBehavior.DoSelectNextVal(tx)
 }
 

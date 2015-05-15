@@ -8,7 +8,8 @@ import (
 
 type WhiteSameNameRefCB struct {
 	BaseConditionBean *df.BaseConditionBean
-	Query             *cq.WhiteSameNameRefCQ
+	query             *cq.WhiteSameNameRefCQ
+    NssWhiteSameName *WhiteSameNameNss
 }
 
 func CreateWhiteSameNameRefCB() *WhiteSameNameRefCB {
@@ -18,31 +19,61 @@ func CreateWhiteSameNameRefCB() *WhiteSameNameRefCB {
 	cb.BaseConditionBean.TableDbName = "WhiteSameNameRef"
 	cb.BaseConditionBean.Name = "WhiteSameNameRefCB"
 	cb.BaseConditionBean.SqlClause = df.CreateSqlClause(cb, df.DBCurrent_I)
-	//dm:=DBMetaProvider_I.TableDbNameInstanceMap["WhiteSameNameRef"]
 	var dmx df.DBMeta = meta.WhiteSameNameRefDbm
 	(*cb.BaseConditionBean.SqlClause).SetDBMeta(&dmx)
 	(*cb.BaseConditionBean.SqlClause).SetUseSelectIndex(true)
-	cb.Query = cb.createConditionQuery(nil, cb.BaseConditionBean.SqlClause, (*cb.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
 	return cb
+}
+
+func (l *WhiteSameNameRefCB) Query() *cq.WhiteSameNameRefCQ {
+	if l.query == nil {
+		l.query = cq.CreateWhiteSameNameRefCQ(nil, l.BaseConditionBean.SqlClause, (*l.BaseConditionBean.SqlClause).GetBasePorintAliasName(), 0)
+		var cb df.ConditionBean = l
+		l.query.BaseConditionQuery.BaseCB = &cb	
+	}
+	return l.query
 }
 func (l *WhiteSameNameRefCB) GetBaseConditionBean() *df.BaseConditionBean {
 	return l.BaseConditionBean
 }
 
-func (l *WhiteSameNameRefCB) createConditionQuery(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *cq.WhiteSameNameRefCQ {
-	cq := new(cq.WhiteSameNameRefCQ)
-	cq.BaseConditionQuery = new(df.BaseConditionQuery)
-	cq.BaseConditionQuery.TableDbName = l.BaseConditionBean.TableDbName
-	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
-	cq.BaseConditionQuery.SqlClause = sqlClause
-	cq.BaseConditionQuery.AliasName = aliasName
-	cq.BaseConditionQuery.NestLevel = nestlevel
-	cq.BaseConditionQuery.DBMetaProvider = l.BaseConditionBean.DBMetaProvider
-	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
-	cq.BaseConditionQuery.ConditionQuery=cq
-	return cq
-}
-
 func (l *WhiteSameNameRefCB) AllowEmptyStringQuery() {
 	l.BaseConditionBean.AllowEmptyStringQuery()
+}
+
+func (l *WhiteSameNameRefCB) SetupSelect_WhiteSameName() *WhiteSameNameNss {
+	l.BaseConditionBean.DoSetupSelect(l.Query().GetBaseConditionQuery(),
+		l.Query().QueryWhiteSameName().GetBaseConditionQuery())
+	if l.NssWhiteSameName == nil || !l.NssWhiteSameName.hasConditionQuery() {
+		l.NssWhiteSameName = new(WhiteSameNameNss)
+		l.NssWhiteSameName.Query = l.Query().QueryWhiteSameName()
+	}
+	return l.NssWhiteSameName
+}
+
+func (l *WhiteSameNameRefCB) FetchFirst(fetchSize int){
+	(*l.GetBaseConditionBean().SqlClause).FetchFirst(fetchSize)
+}
+
+func (l *WhiteSameNameRefCB) OrScopeQuery(fquery func(*WhiteSameNameRefCB)){
+	(*l.BaseConditionBean.SqlClause).MakeOrScopeQueryEffective()
+	fquery(l)
+	(*l.BaseConditionBean.SqlClause).CloseOrScopeQuery()
+}
+
+type WhiteSameNameRefNss struct {
+	Query *cq.WhiteSameNameRefCQ
+    NssWhiteSameName *WhiteSameNameNss
+}
+func (p *WhiteSameNameRefNss) WithWhiteSameName() *WhiteSameNameNss{
+	(*p.Query.BaseConditionQuery.BaseCB).GetBaseConditionBean().
+	DoSetupSelect(p.Query.BaseConditionQuery,p.Query.QueryWhiteSameName().GetBaseConditionQuery())
+	if p.NssWhiteSameName == nil || !p.NssWhiteSameName.hasConditionQuery() {
+		p.NssWhiteSameName = new(WhiteSameNameNss)
+		p.NssWhiteSameName.Query = p.Query.QueryWhiteSameName()
+	}
+	return p.NssWhiteSameName
+}
+func (p *WhiteSameNameRefNss) hasConditionQuery() bool {
+	return p.Query != nil
 }

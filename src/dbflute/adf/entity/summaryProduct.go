@@ -7,8 +7,8 @@ import (
 
 type SummaryProduct struct {
 	productId sql.NullInt64
-	productName df.NullString
-	productStatusCode df.NullString
+	productName sql.NullString
+	productStatusCode sql.NullString
 	latestPurchaseDatetime df.NullTimestamp
 	df.BaseEntity
 }
@@ -22,10 +22,10 @@ func CreateSummaryProduct() *SummaryProduct{
 func (l *SummaryProduct) GetProductId () sql.NullInt64 {
 	return l.productId
 }
-func (l *SummaryProduct) GetProductName () df.NullString {
+func (l *SummaryProduct) GetProductName () sql.NullString {
 	return l.productName
 }
-func (l *SummaryProduct) GetProductStatusCode () df.NullString {
+func (l *SummaryProduct) GetProductStatusCode () sql.NullString {
 	return l.productStatusCode
 }
 func (l *SummaryProduct) GetLatestPurchaseDatetime () df.NullTimestamp {
@@ -53,11 +53,11 @@ func (t *SummaryProduct) SetProductId(productId sql.NullInt64) {
 	t.AddPropertyName("productId")
 	t.productId = productId
 }
-func (t *SummaryProduct) SetProductName(productName df.NullString) {
+func (t *SummaryProduct) SetProductName(productName sql.NullString) {
 	t.AddPropertyName("productName")
 	t.productName = productName
 }
-func (t *SummaryProduct) SetProductStatusCode(productStatusCode df.NullString) {
+func (t *SummaryProduct) SetProductStatusCode(productStatusCode sql.NullString) {
 	t.AddPropertyName("productStatusCode")
 	t.productStatusCode = productStatusCode
 }
@@ -65,7 +65,6 @@ func (t *SummaryProduct) SetLatestPurchaseDatetime(latestPurchaseDatetime df.Nul
 	t.AddPropertyName("latestPurchaseDatetime")
 	t.latestPurchaseDatetime = latestPurchaseDatetime
 }
-
 func (t *SummaryProduct) SetUp(){
 	
 }

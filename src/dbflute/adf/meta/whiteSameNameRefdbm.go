@@ -14,6 +14,20 @@ type WhiteSameNameRefDbm_T struct {
 func (b *WhiteSameNameRefDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *WhiteSameNameRefDbm_T) foreignWhiteSameName() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		WhiteSameNameRefDbm.GetColumnInfoByPropertyName("sameNameId"),
+		WhiteSameNameDbm.GetColumnInfoByPropertyName("sameNameId"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_white_same_name_ref", "WhiteSameName",
+		columns, 0, false, false, false, false,
+		"", nil, false, "whiteSameNameRefList")
+}	
+func (b *WhiteSameNameRefDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["WhiteSameName"] = b.foreignWhiteSameName()
+}
 
 func (b *WhiteSameNameRefDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -34,17 +48,14 @@ func Create_WhiteSameNameRefDbm() {
 	whiteSameNameRef = WhiteSameNameRefDbm
 	WhiteSameNameRefDbm.DBMeta=&whiteSameNameRef
 	sameNameRefIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo same_name_ref_id
 	sameNameRefIdSqlName.ColumnSqlName = "same_name_ref_id"
 	sameNameRefIdSqlName.IrregularChar = false
 	WhiteSameNameRefDbm.ColumnSameNameRefId = df.CCI(&whiteSameNameRef, "same_name_ref_id", sameNameRefIdSqlName, "", "", "Integer.class", "sameNameRefId", "", true, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	sameNameIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo same_name_id
 	sameNameIdSqlName.ColumnSqlName = "same_name_id"
 	sameNameIdSqlName.IrregularChar = false
 	WhiteSameNameRefDbm.ColumnSameNameId = df.CCI(&whiteSameNameRef, "same_name_id", sameNameIdSqlName, "", "", "Long.class", "sameNameId", "", false, false,true, "int8", 19, 0, "",false,"","", "whiteSameName","","",false,"int64")
 	nextSameNameIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo next_same_name_id
 	nextSameNameIdSqlName.ColumnSqlName = "next_same_name_id"
 	nextSameNameIdSqlName.IrregularChar = false
 	WhiteSameNameRefDbm.ColumnNextSameNameId = df.CCI(&whiteSameNameRef, "next_same_name_id", nextSameNameIdSqlName, "", "", "Long.class", "nextSameNameId", "", false, false,true, "int8", 19, 0, "",false,"","", "","","",false,"int64")

@@ -14,6 +14,9 @@ type WhiteCompoundPkDbm_T struct {
 func (b *WhiteCompoundPkDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *WhiteCompoundPkDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+}
 
 func (b *WhiteCompoundPkDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -34,17 +37,14 @@ func Create_WhiteCompoundPkDbm() {
 	whiteCompoundPk = WhiteCompoundPkDbm
 	WhiteCompoundPkDbm.DBMeta=&whiteCompoundPk
 	pkFirstIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo pk_first_id
 	pkFirstIdSqlName.ColumnSqlName = "pk_first_id"
 	pkFirstIdSqlName.IrregularChar = false
 	WhiteCompoundPkDbm.ColumnPkFirstId = df.CCI(&whiteCompoundPk, "pk_first_id", pkFirstIdSqlName, "", "", "Integer.class", "pkFirstId", "", true, false,true, "int4", 10, 0, "",false,"","", "","whiteCompoundPkRefList","",false,"int64")
 	pkSecondIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo pk_second_id
 	pkSecondIdSqlName.ColumnSqlName = "pk_second_id"
 	pkSecondIdSqlName.IrregularChar = false
 	WhiteCompoundPkDbm.ColumnPkSecondId = df.CCI(&whiteCompoundPk, "pk_second_id", pkSecondIdSqlName, "", "", "Integer.class", "pkSecondId", "", true, false,true, "int4", 10, 0, "",false,"","", "","whiteCompoundPkRefList","",false,"int64")
 	pkNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo pk_name
 	pkNameSqlName.ColumnSqlName = "pk_name"
 	pkNameSqlName.IrregularChar = false
 	WhiteCompoundPkDbm.ColumnPkName = df.CCI(&whiteCompoundPk, "pk_name", pkNameSqlName, "", "", "String.class", "pkName", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")

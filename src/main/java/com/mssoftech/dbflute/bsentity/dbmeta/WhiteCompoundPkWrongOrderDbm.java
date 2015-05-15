@@ -73,7 +73,7 @@ public class WhiteCompoundPkWrongOrderDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnThirdId = cci("third_id", "third_id", null, null, Integer.class, "thirdId", null, true, false, true, "int4", 10, 0, null, false, null, null, null, null, null, false);
 //"int64"
     protected final ColumnInfo _columnWrongName = cci("wrong_name", "wrong_name", null, null, String.class, "wrongName", null, false, false, false, "varchar", 200, 0, null, false, null, null, null, null, null, false);
-//"df.NullString"
+//"sql.NullString"
 
     /**
      * first_id: {PK, NotNull, int4(10)}

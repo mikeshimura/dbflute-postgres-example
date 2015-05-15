@@ -24,6 +24,31 @@ type ProductDbm_T struct {
 func (b *ProductDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
+func (b *ProductDbm_T) foreignProductCategory() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		ProductDbm.GetColumnInfoByPropertyName("productCategoryCode"),
+		ProductCategoryDbm.GetColumnInfoByPropertyName("productCategoryCode"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_product_product_category", "ProductCategory",
+		columns, 0, false, false, false, false,
+		"", nil, false, "productList")
+}	
+func (b *ProductDbm_T) foreignProductStatus() *df.ForeignInfo {
+	columns := []*df.ColumnInfo{
+		ProductDbm.GetColumnInfoByPropertyName("productStatusCode"),
+		ProductStatusDbm.GetColumnInfoByPropertyName("productStatusCode"),
+	}
+
+	return b.BaseDBMeta.Cfi("fk_product_product_status", "ProductStatus",
+		columns, 1, false, false, false, false,
+		"", nil, false, "productList")
+}	
+func (b *ProductDbm_T) CreateForeignInfoMap() {
+	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
+	b.ForeignInfoMap["ProductCategory"] = b.foreignProductCategory()
+	b.ForeignInfoMap["ProductStatus"] = b.foreignProductStatus()
+}
 
 func (b *ProductDbm_T) GetDbCurrent() *df.DBCurrent {
 	return df.DBCurrent_I
@@ -44,67 +69,54 @@ func Create_ProductDbm() {
 	product = ProductDbm
 	ProductDbm.DBMeta=&product
 	productIdSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_id
 	productIdSqlName.ColumnSqlName = "product_id"
 	productIdSqlName.IrregularChar = false
 	ProductDbm.ColumnProductId = df.CCI(&product, "product_id", productIdSqlName, "", "", "Integer.class", "productId", "", true, true,true, "serial", 10, 0, "nextval('product_product_id_seq'::regclass)",false,"","", "","purchaseList","",false,"int64")
 	productNameSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_name
 	productNameSqlName.ColumnSqlName = "product_name"
 	productNameSqlName.IrregularChar = false
 	ProductDbm.ColumnProductName = df.CCI(&product, "product_name", productNameSqlName, "", "", "String.class", "productName", "", false, false,true, "varchar", 50, 0, "",false,"","", "","","",false,"string")
 	productHandleCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_handle_code
 	productHandleCodeSqlName.ColumnSqlName = "product_handle_code"
 	productHandleCodeSqlName.IrregularChar = false
 	ProductDbm.ColumnProductHandleCode = df.CCI(&product, "product_handle_code", productHandleCodeSqlName, "", "", "String.class", "productHandleCode", "", false, false,true, "varchar", 100, 0, "",false,"","", "","","",false,"string")
 	productCategoryCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_category_code
 	productCategoryCodeSqlName.ColumnSqlName = "product_category_code"
 	productCategoryCodeSqlName.IrregularChar = false
 	ProductDbm.ColumnProductCategoryCode = df.CCI(&product, "product_category_code", productCategoryCodeSqlName, "", "", "String.class", "productCategoryCode", "", false, false,true, "bpchar", 3, 0, "",false,"","", "productCategory","","",false,"string")
 	productStatusCodeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo product_status_code
 	productStatusCodeSqlName.ColumnSqlName = "product_status_code"
 	productStatusCodeSqlName.IrregularChar = false
 	ProductDbm.ColumnProductStatusCode = df.CCI(&product, "product_status_code", productStatusCodeSqlName, "", "", "String.class", "productStatusCode", "", false, false,true, "bpchar", 3, 0, "",false,"","", "productStatus","","",false,"string")
 	regularPriceSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo regular_price
 	regularPriceSqlName.ColumnSqlName = "regular_price"
 	regularPriceSqlName.IrregularChar = false
 	ProductDbm.ColumnRegularPrice = df.CCI(&product, "regular_price", regularPriceSqlName, "", "", "Integer.class", "regularPrice", "", false, false,true, "int4", 10, 0, "",false,"","", "","","",false,"int64")
 	registerDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_datetime
 	registerDatetimeSqlName.ColumnSqlName = "register_datetime"
 	registerDatetimeSqlName.IrregularChar = false
 	ProductDbm.ColumnRegisterDatetime = df.CCI(&product, "register_datetime", registerDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "registerDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	registerUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_user
 	registerUserSqlName.ColumnSqlName = "register_user"
 	registerUserSqlName.IrregularChar = false
 	ProductDbm.ColumnRegisterUser = df.CCI(&product, "register_user", registerUserSqlName, "", "", "String.class", "registerUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	registerProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo register_process
 	registerProcessSqlName.ColumnSqlName = "register_process"
 	registerProcessSqlName.IrregularChar = false
 	ProductDbm.ColumnRegisterProcess = df.CCI(&product, "register_process", registerProcessSqlName, "", "", "String.class", "registerProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateDatetimeSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_datetime
 	updateDatetimeSqlName.ColumnSqlName = "update_datetime"
 	updateDatetimeSqlName.IrregularChar = false
 	ProductDbm.ColumnUpdateDatetime = df.CCI(&product, "update_datetime", updateDatetimeSqlName, "", "", "java.time.LocalDateTime.class", "updateDatetime", "", false, false,true, "timestamp", 26, 3, "",false,"","", "","","",false,"df.Timestamp")
 	updateUserSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_user
 	updateUserSqlName.ColumnSqlName = "update_user"
 	updateUserSqlName.IrregularChar = false
 	ProductDbm.ColumnUpdateUser = df.CCI(&product, "update_user", updateUserSqlName, "", "", "String.class", "updateUser", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	updateProcessSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo update_process
 	updateProcessSqlName.ColumnSqlName = "update_process"
 	updateProcessSqlName.IrregularChar = false
 	ProductDbm.ColumnUpdateProcess = df.CCI(&product, "update_process", updateProcessSqlName, "", "", "String.class", "updateProcess", "", false, false,true, "varchar", 200, 0, "",false,"","", "","","",false,"string")
 	versionNoSqlName := new(df.ColumnSqlName)
-	//colsqlname dayoo version_no
 	versionNoSqlName.ColumnSqlName = "version_no"
 	versionNoSqlName.IrregularChar = false
 	ProductDbm.ColumnVersionNo = df.CCI(&product, "version_no", versionNoSqlName, "", "", "Long.class", "versionNo", "", false, false,true, "int8", 19, 0, "",false,"OptimisticLockType.VERSION_NO","", "","","",false,"int64")

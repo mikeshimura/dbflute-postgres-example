@@ -20,6 +20,8 @@ type PurchaseCQ struct {
 	UpdateUser *df.ConditionValue
 	UpdateProcess *df.ConditionValue
 	VersionNo *df.ConditionValue
+    conditionQueryMember *MemberCQ
+    conditionQueryProduct *ProductCQ
 }
 
 func (q *PurchaseCQ) GetBaseConditionQuery() *df.BaseConditionQuery{
@@ -40,7 +42,10 @@ func (q *PurchaseCQ) SetPurchaseId_Equal(value int64) *PurchaseCQ {
 	q.regPurchaseId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetPurchaseId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePurchaseId(), "purchaseId")
+}
 func (q *PurchaseCQ) SetPurchaseId_NotEqual(value int64) *PurchaseCQ {
 	q.regPurchaseId(df.CK_NE_C, value)
 	return q
@@ -106,7 +111,10 @@ func (q *PurchaseCQ) SetMemberId_Equal(value int64) *PurchaseCQ {
 	q.regMemberId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetMemberId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueMemberId(), "memberId")
+}
 func (q *PurchaseCQ) SetMemberId_NotEqual(value int64) *PurchaseCQ {
 	q.regMemberId(df.CK_NE_C, value)
 	return q
@@ -164,7 +172,10 @@ func (q *PurchaseCQ) SetProductId_Equal(value int64) *PurchaseCQ {
 	q.regProductId(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetProductId_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueProductId(), "productId")
+}
 func (q *PurchaseCQ) SetProductId_NotEqual(value int64) *PurchaseCQ {
 	q.regProductId(df.CK_NE_C, value)
 	return q
@@ -273,7 +284,10 @@ func (q *PurchaseCQ) SetPurchaseCount_Equal(value int64) *PurchaseCQ {
 	q.regPurchaseCount(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetPurchaseCount_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePurchaseCount(), "purchaseCount")
+}
 func (q *PurchaseCQ) SetPurchaseCount_NotEqual(value int64) *PurchaseCQ {
 	q.regPurchaseCount(df.CK_NE_C, value)
 	return q
@@ -331,7 +345,10 @@ func (q *PurchaseCQ) SetPurchasePrice_Equal(value int64) *PurchaseCQ {
 	q.regPurchasePrice(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetPurchasePrice_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePurchasePrice(), "purchasePrice")
+}
 func (q *PurchaseCQ) SetPurchasePrice_NotEqual(value int64) *PurchaseCQ {
 	q.regPurchasePrice(df.CK_NE_C, value)
 	return q
@@ -389,7 +406,10 @@ func (q *PurchaseCQ) SetPaymentCompleteFlg_Equal(value int64) *PurchaseCQ {
 	q.regPaymentCompleteFlg(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetPaymentCompleteFlg_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValuePaymentCompleteFlg(), "paymentCompleteFlg")
+}
 func (q *PurchaseCQ) SetPaymentCompleteFlg_NotEqual(value int64) *PurchaseCQ {
 	q.regPaymentCompleteFlg(df.CK_NE_C, value)
 	return q
@@ -497,7 +517,10 @@ func (q *PurchaseCQ) SetRegisterUser_Equal(value string) *PurchaseCQ {
 	q.regRegisterUser(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *PurchaseCQ) SetRegisterUser_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueRegisterUser(), "registerUser")
+}
 func (q *PurchaseCQ) SetRegisterUser_NotEqual(value string) *PurchaseCQ {
 	q.regRegisterUser(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -563,7 +586,10 @@ func (q *PurchaseCQ) SetRegisterProcess_Equal(value string) *PurchaseCQ {
 	q.regRegisterProcess(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *PurchaseCQ) SetRegisterProcess_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueRegisterProcess(), "registerProcess")
+}
 func (q *PurchaseCQ) SetRegisterProcess_NotEqual(value string) *PurchaseCQ {
 	q.regRegisterProcess(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -680,7 +706,10 @@ func (q *PurchaseCQ) SetUpdateUser_Equal(value string) *PurchaseCQ {
 	q.regUpdateUser(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *PurchaseCQ) SetUpdateUser_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueUpdateUser(), "updateUser")
+}
 func (q *PurchaseCQ) SetUpdateUser_NotEqual(value string) *PurchaseCQ {
 	q.regUpdateUser(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -746,7 +775,10 @@ func (q *PurchaseCQ) SetUpdateProcess_Equal(value string) *PurchaseCQ {
 	q.regUpdateProcess(df.CK_EQ_C, q.BaseConditionQuery.FRES(value))
 	return q
 }
-
+func (q *PurchaseCQ) SetUpdateProcess_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueUpdateProcess(), "updateProcess")
+}
 func (q *PurchaseCQ) SetUpdateProcess_NotEqual(value string) *PurchaseCQ {
 	q.regUpdateProcess(df.CK_NE_C, q.BaseConditionQuery.FRES(value))
 	return q
@@ -813,7 +845,10 @@ func (q *PurchaseCQ) SetVersionNo_Equal(value int64) *PurchaseCQ {
 	q.regVersionNo(df.CK_EQ_C, value)
 	return q
 }
-
+func (q *PurchaseCQ) SetVersionNo_InScope(list *df.List){
+	q.BaseConditionQuery.RegINS(df.CK_INS_C, list,
+		 q.getCValueVersionNo(), "versionNo")
+}
 func (q *PurchaseCQ) SetVersionNo_NotEqual(value int64) *PurchaseCQ {
 	q.regVersionNo(df.CK_NE_C, value)
 	return q
@@ -858,3 +893,70 @@ func (q *PurchaseCQ) regVersionNo(key *df.ConditionKey, value interface{}) {
 	q.BaseConditionQuery.RegQ(key, value, q.VersionNo, "versionNo")
 }
 
+
+func (q *PurchaseCQ) QueryMember() *MemberCQ {
+	if q.conditionQueryMember == nil {
+		q.conditionQueryMember = q.xcreateQueryMember()
+		q.xsetupOuterJoinMember()
+	}
+	return q.conditionQueryMember
+}
+
+func (q *PurchaseCQ) xcreateQueryMember() *MemberCQ {
+	nrp := q.BaseConditionQuery.ResolveNextRelationPath("Purchase", "Member")
+	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
+	var basecq df.ConditionQuery = q
+	cq := CreateMemberCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
+	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
+	cq.BaseConditionQuery.ForeignPropertyName = "Member"
+	cq.BaseConditionQuery.RelationPath = nrp
+	return cq
+}
+func (q *PurchaseCQ) xsetupOuterJoinMember() {
+	    cq := q.QueryMember()
+        joinOnMap := make(map[string]string)
+        joinOnMap["memberId"]="memberId"
+        q.BaseConditionQuery.RegisterOuterJoin(
+        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "Member");
+}	
+	
+func (q *PurchaseCQ) QueryProduct() *ProductCQ {
+	if q.conditionQueryProduct == nil {
+		q.conditionQueryProduct = q.xcreateQueryProduct()
+		q.xsetupOuterJoinProduct()
+	}
+	return q.conditionQueryProduct
+}
+
+func (q *PurchaseCQ) xcreateQueryProduct() *ProductCQ {
+	nrp := q.BaseConditionQuery.ResolveNextRelationPath("Purchase", "Product")
+	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
+	var basecq df.ConditionQuery = q
+	cq := CreateProductCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
+	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
+	cq.BaseConditionQuery.ForeignPropertyName = "Product"
+	cq.BaseConditionQuery.RelationPath = nrp
+	return cq
+}
+func (q *PurchaseCQ) xsetupOuterJoinProduct() {
+	    cq := q.QueryProduct()
+        joinOnMap := make(map[string]string)
+        joinOnMap["productId"]="productId"
+        q.BaseConditionQuery.RegisterOuterJoin(
+        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "Product");
+}	
+	
+func CreatePurchaseCQ(referrerQuery *df.ConditionQuery, sqlClause *df.SqlClause, aliasName string, nestlevel int8) *PurchaseCQ {
+	cq := new(PurchaseCQ)
+	cq.BaseConditionQuery = new(df.BaseConditionQuery)
+	cq.BaseConditionQuery.TableDbName = "Purchase"
+	cq.BaseConditionQuery.ReferrerQuery = referrerQuery
+	cq.BaseConditionQuery.SqlClause = sqlClause
+	cq.BaseConditionQuery.AliasName = aliasName
+	cq.BaseConditionQuery.NestLevel = nestlevel
+	cq.BaseConditionQuery.DBMetaProvider = df.DBMetaProvider_I
+	cq.BaseConditionQuery.CQ_PROPERTY = "Query"
+	var cqi df.ConditionQuery = cq
+	cq.BaseConditionQuery.ConditionQuery=&cqi
+	return cq
+}	
